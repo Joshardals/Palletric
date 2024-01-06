@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-open_sans)"],
         mono: ["var(--font-roboto)"],
+        sans: ["var(--font-open_sans)"],
       },
     },
   },
