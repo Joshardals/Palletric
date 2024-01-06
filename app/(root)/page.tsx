@@ -1,4 +1,4 @@
-import Image from "next/image";
+import SearchContainer from "@/components/shared/SearchItem";
 
 export default function Home() {
   return (
@@ -7,6 +7,7 @@ export default function Home() {
         <p>What good!</p>
         <p>What good!</p>
         <p>What good!</p>
+        <SearchContainer />
       </div>
     </main>
   );
