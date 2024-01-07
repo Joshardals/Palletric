@@ -21,4 +21,7 @@ body {
   .justify-centered {
     @apply flex justify-center items-center;
   }
+  .transitionAll {
+    @apply transition-all duration-300 ease-in-out;
+  }
 }
