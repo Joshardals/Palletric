@@ -4,23 +4,28 @@ import { useSearchStore } from "@/lib/store/store";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { search, setSearch } = useSearchStore();
+  const { search, setSearch, updateSearch } = useSearchStore();
+
+  // Event Listeners for ctrl + k and esc button
 
   useEffect(() => {
     const handleKeyDown = (e: any) => {
       if (e.ctrlKey && e.key === "k") {
-        setSearch;
-        alert(search);
+        e.preventDefault();
+        updateSearch(true);
       }
-      // if (search) {
-      //   if (e.key === "Escape") {
-      //     setSearch();
-      //   }
-      // }
+
+      if (e.key === "Escape") {
+        updateSearch(false);
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
   }, []);
+
+  useEffect(() => {
+    console.log("The search is changing now, I think.", search);
+  }, [search]);
 
   return (
     <main className="container">
@@ -28,7 +33,7 @@ export default function Home() {
         <p>What good!</p>
         <p>What good!</p>
         <p>What good!</p>
-        {search && <SearchContainer />}
+        {search ? <SearchContainer /> : null}
       </div>
     </main>
   );
