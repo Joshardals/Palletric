@@ -23,16 +23,37 @@ export default function SearchContainer() {
         className="flex justify-center"
         onClick={(e) => {
           if (search) {
-            e.stopPropagation(); 
+            e.stopPropagation();
           }
         }}
       >
         <GeoapifyContext apiKey={process.env.NEXT_PUBLIC_GEO_API_KEY}>
-          <div className=" sm:w-[45rem]">
-            <GeoapifyGeocoderAutocomplete
-              placeholder="Enter a location"
-              skipIcons
-            />
+          <div className="flex flex-col items-start space-y-4">
+            <div className=" sm:w-[30rem] md:w-[45rem] flex items-center">
+              <div className="flex-1">
+                <GeoapifyGeocoderAutocomplete
+                  placeholder="Enter a location"
+                  skipIcons
+                />
+              </div>
+
+              <div
+                className=" bg-gray-700/80 transitionAll cursor-pointer py-1 px-4 rounded-md"
+                onClick={() => {
+                  setSearch();
+                }}
+              >
+                <p className=" font-bold">Esc</p>
+              </div>
+            </div>
+
+            <button
+              className="bg-[#6BA54C] text-gray-900 px-4 py-2 rounded-md font-semibold
+              hover:bg-[#6BA54C]/80 transitionAll
+            "
+            >
+              Current Location
+            </button>
           </div>
         </GeoapifyContext>
       </div>
