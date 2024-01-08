@@ -20,7 +20,7 @@ export default function SearchContainer() {
       }}
     >
       <div
-        className="flex justify-center bg-gray-800 p-5 rounded-2xl w-full"
+        className="flex justify-center bg-gray-900 p-5 rounded-2xl w-full sm:mx-auto sm:max-w-[50rem] border border-gray-800"
         onClick={(e) => {
           if (search) {
             e.stopPropagation();
@@ -32,7 +32,7 @@ export default function SearchContainer() {
             <div className="flex items-center w-full">
               <div className="flex-1">
                 <GeoapifyGeocoderAutocomplete
-                  placeholder="Enter a location"
+                  placeholder="Search for a place"
                   skipIcons
                 />
               </div>
