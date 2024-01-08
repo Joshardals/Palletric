@@ -9,8 +9,8 @@ export default function SearchContainer() {
   const { search, setSearch } = useSearchStore();
   return (
     <div
-      className={`fixed top-0 left-0 h-screen w-full bg-gray-900/70 z-10 overflow-hidden
-    backdrop-blur-sm justify-centered opacity-0
+      className={`fixed top-0 left-0 h-screen w-full bg-gray-900/70 z-10 overflow-hidden select-none
+    backdrop-blur-sm justify-centered opacity-0 p-5 sm:px-20
     ${search && "opacity-100"} 
     `}
       onClick={() => {
@@ -20,7 +20,7 @@ export default function SearchContainer() {
       }}
     >
       <div
-        className="flex justify-center"
+        className="flex justify-center bg-gray-800 p-5 rounded-2xl w-full"
         onClick={(e) => {
           if (search) {
             e.stopPropagation();
@@ -28,8 +28,8 @@ export default function SearchContainer() {
         }}
       >
         <GeoapifyContext apiKey={process.env.NEXT_PUBLIC_GEO_API_KEY}>
-          <div className="flex flex-col items-start space-y-4">
-            <div className=" sm:w-[30rem] md:w-[45rem] flex items-center">
+          <div className="flex flex-col items-start space-y-4 w-full">
+            <div className="flex items-center w-full">
               <div className="flex-1">
                 <GeoapifyGeocoderAutocomplete
                   placeholder="Enter a location"
@@ -47,13 +47,23 @@ export default function SearchContainer() {
               </div>
             </div>
 
-            <button
-              className="bg-[#6BA54C] text-gray-900 px-4 py-2 rounded-md font-semibold
+            {/* <button
+              className="border border-[#6BA54C] text-white px-4 py-2 rounded-md
               hover:bg-[#6BA54C]/80 transitionAll
             "
             >
               Current Location
-            </button>
+            </button> */}
+
+            <div
+              className=" bg-gradient-to-r from-[#F59E0B] to-[#6BA54C]  p-[0.1rem] rounded-md cursor-pointer
+              hover:bg-gradient-to-r hover:from-[#6BA54C] hover:to-[#F59E0B]
+            "
+            >
+              <button className="bg-gray-900 px-4 py-2 rounded-md">
+                Current Location
+              </button>
+            </div>
           </div>
         </GeoapifyContext>
       </div>
