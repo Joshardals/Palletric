@@ -6,7 +6,7 @@ import { useEffect } from "react";
 export default function Home() {
   const { search, setSearch, updateSearch } = useSearchStore();
 
-  // Event Listeners for ctrl + k and esc button
+  // Event Listeners for ctrl + k and esc button -- START.
 
   useEffect(() => {
     const handleKeyDown = (e: any) => {
@@ -23,13 +23,11 @@ export default function Home() {
     document.addEventListener("keydown", handleKeyDown);
   }, []);
 
-  useEffect(() => {
-    console.log("The search is changing now, I think.", search);
-  }, [search]);
+  // Event Listeners for ctrl + k and esc button -- END.
 
   return (
-    <main className="container">
-      <div className="px-5">
+    <main className="hfPadding h-screen">
+      <div className="">
         <p>What good!</p>
         <p>What good!</p>
         <p>What good!</p>

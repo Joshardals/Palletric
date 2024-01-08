@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <section className="container">
+    <section className="hfPadding">
       <div
         className="flex items-center justify-between bg-gray-900
         border border-gray-800 backdrop-blur-lg rounded-2xl p-5"
