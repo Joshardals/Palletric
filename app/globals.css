@@ -8,12 +8,12 @@
 
 html,
 body {
-  @apply bg-black font-sans text-[14px] text-white/80;
+  @apply bg-black font-sans text-[12px] text-white/80;
 }
 
 @layer utilities {
   .h1-bold {
-    @apply font-mono text-white font-medium text-[20px];
+    @apply font-mono text-white font-medium text-[20px] max-sm:text-[18px];
   }
   .wrapper {
     @apply mx-auto p-5 sm:max-w-[70rem];
