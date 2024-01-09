@@ -12,11 +12,30 @@ export default function SearchContainer() {
   const [results, setResults] = useState<LocationResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+  const suggestionListRef = useRef<HTMLUListElement>(null);
 
   const handleArrowUp = () => {
     if (focusedIndex !== null) {
       const newIndex = Math.max(focusedIndex - 1, 0);
       setFocusedIndex(newIndex);
+
+      // Use optional chaining to safely access current and children
+      const suggestionHeight =
+        suggestionListRef.current?.children[0]?.clientHeight || 0;
+
+      // Scroll the suggestion list if needed
+      const scrollOffset = newIndex * suggestionHeight;
+
+      // Use optional chaining to safely access current
+      suggestionListRef.current?.scrollTo({
+        top: Math.max(
+          0,
+          scrollOffset -
+            suggestionListRef.current.clientHeight +
+            suggestionHeight
+        ),
+        behavior: "smooth", // Optional: Add smooth scrolling effect
+      });
     }
   };
 
@@ -27,6 +46,23 @@ export default function SearchContainer() {
           ? 0
           : Math.min(focusedIndex + 1, results.length - 1);
       setFocusedIndex(newIndex);
+      // Calculate the height of each suggestion item
+      const suggestionHeight =
+        suggestionListRef.current?.children[0]?.clientHeight || 0;
+
+      // Scroll the suggestion list if needed
+      const scrollOffset = newIndex * suggestionHeight;
+
+      // Use optional chaining to safely access current
+      suggestionListRef.current?.scrollTo({
+        top: Math.max(
+          0,
+          scrollOffset -
+            suggestionListRef.current.clientHeight +
+            suggestionHeight
+        ),
+        behavior: "smooth", // Optional: Add smooth scrolling effect
+      });
     }
   };
 
@@ -36,8 +72,32 @@ export default function SearchContainer() {
     }
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    switch (e.key) {
+      case "ArrowUp":
+        e.preventDefault();
+        handleArrowUp();
+        break;
+      case "ArrowDown":
+        e.preventDefault();
+        handleArrowDown();
+        break;
+      case "Enter":
+        e.preventDefault();
+        handleEnter();
+        break;
+      default:
+        break;
+    }
+  };
 
-  
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown as any);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown as any);
+    };
+  }, [focusedIndex, results]);
 
   const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -62,6 +122,12 @@ export default function SearchContainer() {
   const handleResultClick = (result: LocationResult) => {
     setUserInput(result.display_name);
     setResults([]);
+    setFocusedIndex(null);
+  };
+
+  const handleBlur = () => {
+    // Reset the focused index when the input loses focus
+    setFocusedIndex(null);
   };
 
   useEffect(() => {
@@ -125,12 +191,16 @@ export default function SearchContainer() {
               className="flex-1 outline-none appearance-none bg-transparent"
               value={userInput}
               onChange={handleInputChange}
+              onBlur={handleBlur}
               autoFocus
               role="combobox"
               aria-autocomplete="list"
               aria-haspopup="true"
-              aria-expanded={results.length > 0 ? "true" : "false"}
+              aria-expanded={results?.length > 0 ? "true" : "false"}
               aria-controls="autocomplete-list"
+              aria-activedescendant={
+                focusedIndex !== null ? `suggestion-${focusedIndex}` : undefined
+              }
             />
 
             <div
@@ -148,13 +218,17 @@ export default function SearchContainer() {
               <ul
                 id="autocomplete-list"
                 role="listbox"
-                className="overflow-y-scroll h-[12rem] border-b border-b-gray-800"
+                ref={suggestionListRef}
+                className="overflow-y-scroll h-[14rem] border-b border-b-gray-800"
               >
                 {results!.map((result, index) => (
                   <li
+                    id={`suggestion-${index}`}
                     key={result.place_id}
                     role="option"
-                    className="bg-gray-900 hover:bg-gray-800/70 transitionAll cursor-pointer p-5 rounded-md"
+                    className={`bg-gray-900 hover:bg-gray-800/70 transitionAll cursor-pointer p-5 rounded-md ${
+                      focusedIndex === index ? "text-[#F59E0B] font-bold" : ""
+                    }`}
                     onClick={() => handleResultClick(result)}
                   >
                     {result.display_name}
