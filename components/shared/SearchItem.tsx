@@ -98,17 +98,19 @@ export default function SearchContainer() {
 
         <div className="flex flex-col space-y-4 pb-5 w-full">
           {results?.length > 0 && (
-            <ul className="overflow-y-scroll h-[12rem] border-b border-b-gray-800">
-              {results!.map((result, index) => (
-                <li
-                  key={result.place_id}
-                  className="bg-gray-900 hover:bg-gray-800/70 transitionAll cursor-pointer p-5 rounded-md"
-                  onClick={() => handleResultClick(result.display_name)}
-                >
-                  {result.display_name}
-                </li>
-              ))}
-            </ul>
+            <div className="relative">
+              <ul className="overflow-y-scroll h-[12rem] border-b border-b-gray-800">
+                {results!.map((result, index) => (
+                  <li
+                    key={result.place_id}
+                    className="bg-gray-900 hover:bg-gray-800/70 transitionAll cursor-pointer p-5 rounded-md"
+                    onClick={() => handleResultClick(result.display_name)}
+                  >
+                    {result.display_name}
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
           <div
             className=" bg-gradient-to-r from-[#F59E0B] to-[#6BA54C]  p-[0.1rem] rounded-md cursor-pointer
