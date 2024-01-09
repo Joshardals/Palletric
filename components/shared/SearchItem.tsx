@@ -13,10 +13,7 @@ export default function SearchContainer() {
   const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
     if (e.target.value) {
-      const fetchedResults = await fetchAutoCompleteFunction(
-        process.env.NEXT_PUBLIC_LOCATION_IQ_ACCESS_TOKEN!,
-        e.target.value
-      );
+      const fetchedResults = await fetchAutoCompleteFunction(e.target.value);
       setResults(fetchedResults);
     } else {
       setResults([]);
@@ -41,7 +38,7 @@ export default function SearchContainer() {
       }}
     >
       <div
-        className="flex flex-col items-start bg-gray-900 rounded-2xl w-full sm:mx-auto sm:max-w-[50rem] border border-gray-800"
+        className="flex flex-col items-start bg-gray-900 rounded-2xl w-full sm:mx-auto sm:max-w-[50rem] border border-gray-800 space-y-2"
         onClick={(e) => {
           if (search) {
             e.stopPropagation();
