@@ -54,7 +54,7 @@ export default function SearchContainer() {
               className="flex-1 outline-none appearance-none bg-transparent"
               value={userInput}
               onChange={handleInputChange}
-              autoFocus
+              // autoFocus
             />
 
             <div
