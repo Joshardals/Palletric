@@ -8,7 +8,7 @@ import { Icons } from "../ui/icons";
 export default function SearchContainer() {
   const { search, setSearch } = useSearchStore();
   const [userInput, setUserInput] = useState("");
-  const [results, setResults] = useState<LocationResult[]>();
+  const [results, setResults] = useState<LocationResult[]>([]);
 
   const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
@@ -66,9 +66,9 @@ export default function SearchContainer() {
           </div>
         </div>
 
-        <div className="flex flex-col space-y-4 pb-5">
-          {results! && (
-            <ul className="w-full">
+        <div className="flex flex-col space-y-4 pb-5 w-full">
+          {results?.length > 0 && (
+            <ul className="overflow-y-scroll h-[12rem] border-b border-b-gray-800">
               {results!.map((result) => (
                 <li
                   key={result.place_id}

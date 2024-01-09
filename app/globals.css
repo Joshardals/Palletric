@@ -8,7 +8,7 @@
 
 html,
 body {
-  @apply bg-black font-sans max-sm:text-[13px] text-[14px] text-white/80;
+  @apply bg-black font-sans max-sm:text-[13px] text-[14px] text-white/80 overflow-hidden;
 }
 
 @layer utilities {
