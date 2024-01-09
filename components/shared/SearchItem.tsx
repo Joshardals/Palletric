@@ -10,16 +10,52 @@ export default function SearchContainer() {
   const { search, setSearch, updateSearch } = useSearchStore();
   const [userInput, setUserInput] = useState("");
   const [results, setResults] = useState<LocationResult[]>([]);
-  const [focusedIndex, setFocusedIndex] = useState<Number | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+
+  const handleArrowUp = () => {
+    if (focusedIndex !== null) {
+      const newIndex = Math.max(focusedIndex - 1, 0);
+      setFocusedIndex(newIndex);
+    }
+  };
+
+  const handleArrowDown = () => {
+    if (results.length > 0) {
+      const newIndex =
+        focusedIndex === null
+          ? 0
+          : Math.min(focusedIndex + 1, results.length - 1);
+      setFocusedIndex(newIndex);
+    }
+  };
+
+  const handleEnter = () => {
+    if (focusedIndex !== null && results.length > 0) {
+      handleResultClick(results[focusedIndex]);
+    }
+  };
+
+
+  
 
   const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setUserInput(inputValue);
+
+    setLoading(true);
     if (inputValue) {
-      const fetchedResults = await fetchAutoCompleteFunction(inputValue);
-      setResults(fetchedResults);
+      try {
+        const fetchedResults = await fetchAutoCompleteFunction(inputValue);
+        setResults(fetchedResults);
+      } catch (error: any) {
+        console.log(`Error fetching autocomplete: ${error.message}`);
+      } finally {
+        setLoading(false);
+      }
     } else {
       setResults([]);
+      setLoading(false);
     }
   };
 
@@ -78,7 +114,11 @@ export default function SearchContainer() {
       >
         <div className="flex flex-col w-full border-b border-b-gray-800 p-5">
           <div className="flex items-center space-x-4">
-            <Icons.search className="h-5 w-5" />
+            {loading ? (
+              <Icons.spinner className="h-5 w-5  text-[#F59E0B] animate-spin" />
+            ) : (
+              <Icons.search className="h-5 w-5" />
+            )}
             <input
               type="text"
               placeholder="Search for a place"
@@ -86,6 +126,11 @@ export default function SearchContainer() {
               value={userInput}
               onChange={handleInputChange}
               autoFocus
+              role="combobox"
+              aria-autocomplete="list"
+              aria-haspopup="true"
+              aria-expanded={results.length > 0 ? "true" : "false"}
+              aria-controls="autocomplete-list"
             />
 
             <div
@@ -100,10 +145,15 @@ export default function SearchContainer() {
         <div className="flex flex-col space-y-4 pb-5 w-full">
           {results?.length > 0 && (
             <div className="relative">
-              <ul className="overflow-y-scroll h-[12rem] border-b border-b-gray-800">
+              <ul
+                id="autocomplete-list"
+                role="listbox"
+                className="overflow-y-scroll h-[12rem] border-b border-b-gray-800"
+              >
                 {results!.map((result, index) => (
                   <li
                     key={result.place_id}
+                    role="option"
                     className="bg-gray-900 hover:bg-gray-800/70 transitionAll cursor-pointer p-5 rounded-md"
                     onClick={() => handleResultClick(result)}
                   >
