@@ -1,7 +1,7 @@
 "use client";
 import { useSearchStore } from "@/lib/store/store";
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
-
+import debounce from "lodash.debounce";
 import { fetchAutoCompleteFunction } from "@/lib/hooks";
 import { LocationResult } from "@/typings";
 import { Icons } from "../ui/icons";
@@ -13,17 +13,18 @@ export default function SearchContainer() {
   const [focusedIndex, setFocusedIndex] = useState<Number | null>(null);
 
   const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    setUserInput(e.target.value);
-    if (e.target.value) {
-      const fetchedResults = await fetchAutoCompleteFunction(e.target.value);
+    const inputValue = e.target.value;
+    setUserInput(inputValue);
+    if (inputValue) {
+      const fetchedResults = await fetchAutoCompleteFunction(inputValue);
       setResults(fetchedResults);
     } else {
       setResults([]);
     }
   };
 
-  const handleResultClick = (result: string) => {
-    setUserInput(result);
+  const handleResultClick = (result: LocationResult) => {
+    setUserInput(result.display_name);
     setResults([]);
   };
 
@@ -104,7 +105,7 @@ export default function SearchContainer() {
                   <li
                     key={result.place_id}
                     className="bg-gray-900 hover:bg-gray-800/70 transitionAll cursor-pointer p-5 rounded-md"
-                    onClick={() => handleResultClick(result.display_name)}
+                    onClick={() => handleResultClick(result)}
                   >
                     {result.display_name}
                   </li>
