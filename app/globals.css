@@ -2,13 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  @apply scroll-smooth p-0 m-0;
-}
-
 html,
 body {
-  @apply bg-black font-sans max-sm:text-[13px] text-[14px] text-white/80 overflow-hidden;
+  @apply bg-black font-sans max-sm:text-[13px] text-[14px] text-white/80 overflow-hidden scroll-smooth p-0 m-0 select-none;
 }
 
 @layer utilities {
