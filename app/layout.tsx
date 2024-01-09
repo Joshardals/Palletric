@@ -21,6 +21,13 @@ export const metadata: Metadata = {
     "Daily color palette suggestion. Generate inspiring color palettes based on the user's location, weather, or chosen emotions. \nIdeal for artists, designers, or anyone seeking visual inspiration.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: "no",
+};
+
 export default function RootLayout({
   children,
 }: {
