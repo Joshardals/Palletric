@@ -154,7 +154,8 @@ export default function SearchContainer() {
   };
 
   useEffect(() => {
-    document.body.classList.toggle("overflow-hidden", search);
+    const isMobileDevice = /Mobi/i.test(navigator.userAgent);
+    document.body.classList.toggle("overflow-hidden", search && isMobileDevice);
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.ctrlKey && e.key === "k") {
