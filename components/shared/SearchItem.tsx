@@ -154,6 +154,8 @@ export default function SearchContainer() {
   };
 
   useEffect(() => {
+    document.body.classList.toggle("overflow-hidden", search);
+
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.ctrlKey && e.key === "k") {
         updateSearch(false);
@@ -168,6 +170,7 @@ export default function SearchContainer() {
     document.addEventListener("keydown", handleKeyDown as any);
 
     return () => {
+      document.body.classList.remove("overflow-hidden");
       document.removeEventListener("keydown", handleKeyDown as any);
     };
   }, [search]);
