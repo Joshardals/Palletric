@@ -235,7 +235,7 @@ export default function SearchContainer() {
               value={userInput}
               onChange={handleInputChange}
               onBlur={handleBlur}
-              autoFocus
+              // autoFocus
               autoCorrect="off"
             />
 
@@ -261,7 +261,7 @@ export default function SearchContainer() {
                     id={`suggestion-${index}`}
                     key={result.place_id}
                     className={`bg-gray-900 hover:bg-gray-800/70 transitionAll p-5 cursor-pointer rounded-md ${
-                      focusedIndex === index && " text-[#F59E0B] font-bold"
+                      focusedIndex === index && " font-bold"
                     }`}
                     onClick={() => handleResultClick(result)}
                   >
