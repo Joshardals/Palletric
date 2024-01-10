@@ -183,7 +183,7 @@ export default function SearchContainer() {
     >
       <div
         className={`flex flex-col items-start bg-gray-900 rounded-2xl w-full sm:mx-auto sm:max-w-[50rem] transitionAll border border-gray-800 ${
-          !(results.length > 0) && "space-y-4"
+          !(results?.length > 0) && "space-y-4"
         }  `}
         onClick={(e) => {
           if (search) {
