@@ -14,6 +14,14 @@ export default function SearchContainer() {
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const suggestionListRef = useRef<HTMLUListElement>(null);
 
+  const highlightMatchedText = (text: string, query: string) => {
+    const regex = new RegExp(`(${query})`, "gi");
+    return text.replace(
+      regex,
+      (match, group) => `<span style="color: #F59E0B;">${group}</span>`
+    );
+  };
+
   const calculateSuggestionHeight = (index: number): number => {
     const suggestionItem = suggestionListRef.current?.children[index] as
       | HTMLElement
@@ -236,7 +244,14 @@ export default function SearchContainer() {
                     }`}
                     onClick={() => handleResultClick(result)}
                   >
-                    {result.display_name}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: highlightMatchedText(
+                          result.display_name,
+                          userInput
+                        ),
+                      }}
+                    />
                   </li>
                 ))}
               </ul>
