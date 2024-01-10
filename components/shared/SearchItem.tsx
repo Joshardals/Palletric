@@ -1,6 +1,13 @@
 "use client";
 import { useSearchStore } from "@/lib/store/store";
-import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  TouchEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import debounce from "lodash.debounce";
 import { fetchAutoCompleteFunction } from "@/lib/hooks";
 import { LocationResult } from "@/typings";
@@ -111,14 +118,6 @@ export default function SearchContainer() {
     }
   };
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown as any);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown as any);
-    };
-  }, [focusedIndex, results]);
-
   const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setUserInput(inputValue);
@@ -154,7 +153,11 @@ export default function SearchContainer() {
   };
 
   useEffect(() => {
-    document.body.classList.toggle("overflow-hidden", search);
+    const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
+      if (search) {
+        e.preventDefault();
+      }
+    };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.ctrlKey && e.key === "k") {
@@ -167,10 +170,18 @@ export default function SearchContainer() {
       setUserInput(savedUserInput);
     }
 
+    document.body.classList.toggle("overflow-hidden", search);
+
+    // Add or remove the event listener based on the search state
+    document.body.addEventListener("touchmove", handleTouchMove as any, {
+      passive: false,
+    });
+
     document.addEventListener("keydown", handleKeyDown as any);
 
     return () => {
       document.body.classList.remove("overflow-hidden");
+      document.body.removeEventListener("touchmove", handleTouchMove as any);
       document.removeEventListener("keydown", handleKeyDown as any);
     };
   }, [search]);
@@ -179,6 +190,14 @@ export default function SearchContainer() {
     localStorage.setItem("userInput", userInput);
     setFocusedIndex(null);
   }, [userInput]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown as any);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown as any);
+    };
+  }, [focusedIndex, results]);
 
   return (
     <div
@@ -234,7 +253,6 @@ export default function SearchContainer() {
             <div className="relative">
               <ul
                 id="autocomplete-list"
-                role="listbox"
                 ref={suggestionListRef}
                 className=" border-b border-b-gray-800"
               >
@@ -242,7 +260,6 @@ export default function SearchContainer() {
                   <li
                     id={`suggestion-${index}`}
                     key={result.place_id}
-                    role="option"
                     className={`bg-gray-900 hover:bg-gray-800/70 transitionAll p-5 cursor-pointer rounded-md ${
                       focusedIndex === index && " bg-gray-800/70 font-bold"
                     }`}
