@@ -148,7 +148,6 @@ export default function SearchContainer() {
   };
 
   const handleBlur = () => {
-    document.body.style.overflow = "visible";
     // Reset the focused index when the input loses focus
     setFocusedIndex(null);
   };
@@ -238,7 +237,6 @@ export default function SearchContainer() {
               onBlur={handleBlur}
               autoCorrect="off"
               autoFocus
-              onFocus={() => (document.body.style.overflow = "hidden")}
             />
 
             <div
