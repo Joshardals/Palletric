@@ -4,7 +4,8 @@
 
 html,
 body {
-  @apply bg-black font-sans max-sm:text-[13px] text-[14px] text-white/80 scroll-smooth p-0 m-0 select-none;
+  @apply bg-black font-sans max-sm:text-[13px] text-[14px] text-white/80 scroll-smooth p-0 m-0 select-none
+  overflow-hidden;
 }
 
 @layer utilities {
