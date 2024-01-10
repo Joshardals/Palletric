@@ -201,7 +201,7 @@ export default function SearchContainer() {
 
   return (
     <div
-      className={`fixed top-0 left-0 h-screen w-full bg-gray-900/70 z-10 overflow-hidden select-none
+      className={`absolute top-0 left-0 bottom-0 h-full w-full bg-gray-900/70 z-10 overflow-hidden select-none
     backdrop-blur-sm justify-centered opacity-0 p-5 sm:px-20
     ${search && "opacity-100"} 
     `}
@@ -261,7 +261,7 @@ export default function SearchContainer() {
                     id={`suggestion-${index}`}
                     key={result.place_id}
                     className={`bg-gray-900 hover:bg-gray-800/70 transitionAll p-5 cursor-pointer rounded-md ${
-                      focusedIndex === index && " bg-gray-800/70 font-bold"
+                      focusedIndex === index && " text-[#F59E0B] font-bold"
                     }`}
                     onClick={() => handleResultClick(result)}
                   >
