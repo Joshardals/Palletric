@@ -235,14 +235,6 @@ export default function SearchContainer() {
               value={userInput}
               onChange={handleInputChange}
               onBlur={handleBlur}
-              onFocus={(e) => {
-                const scrollPosition = window.scrollY;
-
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                });
-              }}
               autoCorrect="off"
               autoFocus
             />

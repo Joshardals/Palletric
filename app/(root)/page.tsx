@@ -32,7 +32,7 @@ export default function Home() {
   // Event Listeners for ctrl + k and esc button -- END.
 
   return (
-    <main className="hfPadding h-screen">
+    <main className="hfPadding">
       <div className="px-5">
         <p>What good!</p>
         <p>What good!</p>
