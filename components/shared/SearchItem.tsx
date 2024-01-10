@@ -222,7 +222,7 @@ export default function SearchContainer() {
                 id="autocomplete-list"
                 role="listbox"
                 ref={suggestionListRef}
-                className="overflow-y-scroll h-[14rem] border-b border-b-gray-800"
+                className=" border-b border-b-gray-800"
               >
                 {results!.map((result, index) => (
                   <li

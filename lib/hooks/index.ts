@@ -6,7 +6,7 @@ const API_KEY = process.env.NEXT_PUBLIC_LOCATION_IQ_ACCESS_TOKEN;
 const debouncedFetchAutoComplete = debounce(async (query: string) => {
   try {
     const res = await axios.get(
-      `https://api.locationiq.com/v1/autocomplete?key=${API_KEY}&q=${query}`
+      `https://api.locationiq.com/v1/autocomplete?key=${API_KEY}&q=${query}&limit=1`
     );
     return res.data;
   } catch (error: any) {
