@@ -14,17 +14,26 @@ export default function SearchContainer() {
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const suggestionListRef = useRef<HTMLUListElement>(null);
 
+  const calculateSuggestionHeight = (index: number): number => {
+    const suggestionItem = suggestionListRef.current?.children[index] as
+      | HTMLElement
+      | undefined;
+    return suggestionItem?.offsetHeight || 0;
+  };
+
   const handleArrowUp = () => {
     if (focusedIndex !== null) {
       const newIndex = Math.max(focusedIndex - 1, 0);
       setFocusedIndex(newIndex);
 
-      // Use optional chaining to safely access current and children
-      const suggestionHeight =
-        suggestionListRef.current?.children[0]?.clientHeight || 0;
+      // Calculate the cumulative height of suggestion items up to the focused index
+      const cumulativeHeight = Array.from({ length: newIndex + 1 })
+        .map((_, i) => calculateSuggestionHeight(i))
+        .reduce((sum, height) => sum + height, 0);
 
       // Scroll the suggestion list if needed
-      const scrollOffset = newIndex * suggestionHeight;
+      const scrollOffset =
+        cumulativeHeight - calculateSuggestionHeight(newIndex);
 
       // Use optional chaining to safely access current
       suggestionListRef.current?.scrollTo({
@@ -32,7 +41,7 @@ export default function SearchContainer() {
           0,
           scrollOffset -
             suggestionListRef.current.clientHeight +
-            suggestionHeight
+            calculateSuggestionHeight(newIndex)
         ),
         behavior: "smooth", // Optional: Add smooth scrolling effect
       });
@@ -46,12 +55,15 @@ export default function SearchContainer() {
           ? 0
           : Math.min(focusedIndex + 1, results.length - 1);
       setFocusedIndex(newIndex);
-      // Calculate the height of each suggestion item
-      const suggestionHeight =
-        suggestionListRef.current?.children[0]?.clientHeight || 0;
+
+      // Calculate the cumulative height of suggestion items up to the focused index
+      const cumulativeHeight = Array.from({ length: newIndex + 1 })
+        .map((_, i) => calculateSuggestionHeight(i))
+        .reduce((sum, height) => sum + height, 0);
 
       // Scroll the suggestion list if needed
-      const scrollOffset = newIndex * suggestionHeight;
+      const scrollOffset =
+        cumulativeHeight - calculateSuggestionHeight(newIndex);
 
       // Use optional chaining to safely access current
       suggestionListRef.current?.scrollTo({
@@ -59,7 +71,7 @@ export default function SearchContainer() {
           0,
           scrollOffset -
             suggestionListRef.current.clientHeight +
-            suggestionHeight
+            calculateSuggestionHeight(newIndex)
         ),
         behavior: "smooth", // Optional: Add smooth scrolling effect
       });
@@ -103,6 +115,9 @@ export default function SearchContainer() {
     const inputValue = e.target.value;
     setUserInput(inputValue);
 
+    // Reset focused Index when the input changes
+    setFocusedIndex(null);
+
     setLoading(true);
     if (inputValue) {
       try {
@@ -131,21 +146,16 @@ export default function SearchContainer() {
   };
 
   useEffect(() => {
-    const savedUserInput = localStorage.getItem("userInput");
-    if (savedUserInput) {
-      setUserInput(savedUserInput);
-    }
-  }, []);
-
-  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.ctrlKey && e.key === "k") {
         updateSearch(false);
       }
     };
 
-    // Functionalities to Add Later On:
-    // 1. Make sure that when the mouse is hovered on any of the locations and when the enter key is pressed, it must populate the form.
+    const savedUserInput = localStorage.getItem("userInput");
+    if (savedUserInput) {
+      setUserInput(savedUserInput);
+    }
 
     document.addEventListener("keydown", handleKeyDown as any);
 
@@ -156,6 +166,7 @@ export default function SearchContainer() {
 
   useEffect(() => {
     localStorage.setItem("userInput", userInput);
+    setFocusedIndex(null);
   }, [userInput]);
 
   return (
