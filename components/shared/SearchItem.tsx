@@ -229,7 +229,7 @@ export default function SearchContainer() {
                     id={`suggestion-${index}`}
                     key={result.place_id}
                     role="option"
-                    className={`bg-gray-900 hover:bg-gray-800/70 transitionAll cursor-pointer p-5 rounded-md text-xs ${
+                    className={`bg-gray-900 hover:bg-gray-800/70 transitionAll cursor-pointer p-5 rounded-md ${
                       focusedIndex === index && " bg-gray-800/70 font-bold"
                     }`}
                     onClick={() => handleResultClick(result)}
