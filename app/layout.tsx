@@ -25,7 +25,7 @@ export const viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  userScalable: "no",
+  userScalable: "0",
 };
 
 export default function RootLayout({

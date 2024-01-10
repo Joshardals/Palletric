@@ -5,7 +5,7 @@
 html,
 body {
   @apply h-full w-full bg-black font-sans max-sm:text-[13px] text-[14px] 
-  text-white/80 scroll-smooth p-0 m-0 select-none overflow-hidden;
+  text-white/80 scroll-smooth p-0 m-0 select-none;
 }
 
 @layer utilities {
@@ -15,6 +15,7 @@ body {
   .wrapper {
     @apply mx-auto p-5 sm:max-w-[70rem];
   }
+
   .hfPadding {
     @apply p-5 sm:px-20 sm:py-10;
   }
