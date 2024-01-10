@@ -182,7 +182,9 @@ export default function SearchContainer() {
       }}
     >
       <div
-        className="flex flex-col items-start bg-gray-900 rounded-2xl w-full sm:mx-auto sm:max-w-[50rem] border border-gray-800 space-y-2"
+        className={`flex flex-col items-start bg-gray-900 rounded-2xl w-full sm:mx-auto sm:max-w-[50rem] transitionAll border border-gray-800 ${
+          !(results.length > 0) && "space-y-4"
+        }  `}
         onClick={(e) => {
           if (search) {
             e.stopPropagation();
@@ -229,7 +231,7 @@ export default function SearchContainer() {
                     id={`suggestion-${index}`}
                     key={result.place_id}
                     role="option"
-                    className={`bg-gray-900 hover:bg-gray-800/70 transitionAll cursor-pointer p-5 rounded-md ${
+                    className={`bg-gray-900 hover:bg-gray-800/70 transitionAll p-5 cursor-pointer rounded-md ${
                       focusedIndex === index && " bg-gray-800/70 font-bold"
                     }`}
                     onClick={() => handleResultClick(result)}
