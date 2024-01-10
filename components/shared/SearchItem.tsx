@@ -214,6 +214,7 @@ export default function SearchContainer() {
               onChange={handleInputChange}
               onBlur={handleBlur}
               autoFocus
+              autoCorrect="off"
             />
 
             <div
