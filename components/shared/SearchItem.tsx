@@ -193,14 +193,6 @@ export default function SearchContainer() {
               onChange={handleInputChange}
               onBlur={handleBlur}
               autoFocus
-              role="combobox"
-              aria-autocomplete="list"
-              aria-haspopup="true"
-              aria-expanded={results?.length > 0 ? "true" : "false"}
-              aria-controls="autocomplete-list"
-              aria-activedescendant={
-                focusedIndex !== null ? `suggestion-${focusedIndex}` : undefined
-              }
             />
 
             <div
