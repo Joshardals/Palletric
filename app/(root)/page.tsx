@@ -2,7 +2,7 @@
 import Search from "@/components/shared/Search";
 import SearchContainer from "@/components/shared/SearchItem";
 import { useSearchStore } from "@/lib/store/store";
-import { KeyboardEvent, useEffect } from "react";
+import { KeyboardEvent, TouchEvent, useEffect } from "react";
 
 export default function Home() {
   const { search, setSearch, updateSearch } = useSearchStore();
@@ -10,6 +10,12 @@ export default function Home() {
   // Event Listeners for ctrl + k and esc button -- START.
 
   useEffect(() => {
+    const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
+      if (search) {
+        e.preventDefault();
+      }
+    };
+
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.ctrlKey && e.key === "k") {
         e.preventDefault();
@@ -23,9 +29,13 @@ export default function Home() {
       }
     };
 
+    document.body.addEventListener("touchmove", handleTouchMove as any, {
+      passive: false,
+    });
     document.addEventListener("keydown", handleKeyDown as any);
 
     return () => {
+      document.body.removeEventListener("touchmove", handleTouchMove as any);
       document.removeEventListener("keydown", handleKeyDown as any);
     };
   }, []);
