@@ -34,25 +34,29 @@ export default function Home() {
   // Event Listeners for ctrl + k and esc button -- END.
 
   useEffect(() => {
-    // Prevent touch events on the modal from bubbling to the body
-    const handleModalTouchMove = (e: any) => {
-      e.preventDefault();
-      e.stopPropagation();
-    };
-
-    if (modalRef.current) {
-      modalRef.current.addEventListener("touchmove", handleModalTouchMove, {
-        passive: false,
-      });
+    // Prevent body scrolling on iOS Safari when the modal is open
+    if (search) {
+      document.body.classList.toggle("overflow-hidden");
+    } else {
+      document.body.classList.toggle("overflow-auto");
     }
 
-    return () => {
-      if (modalRef.current) {
-        modalRef.current.removeEventListener("touchmove", handleModalTouchMove);
+    // Additional functionality to prevent touch events
+    const handleTouchMove = (e: any) => {
+      if (search) {
+        e.preventDefault();
       }
     };
-  }, [search]);
 
+    document.body.addEventListener("touchmove", handleTouchMove, {
+      passive: false,
+    });
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+      document.body.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, [search]);
   return (
     <main className="hfPadding h-screen">
       <div className="px-5">
@@ -63,14 +67,13 @@ export default function Home() {
         {/* {search && <SearchContainer />} */}
 
         {search && (
-          <div className=" fixed top-0 left-0 w-full h-[100svh] bg-gray-800/60 flex items-center justify-center z-[1000]">
+          <div className=" fixed top-0 left-0 bottom-0 w-full h-full bg-gray-800/60 flex items-center justify-center z-[1000]">
             <div className="bg-white text-black p-5 rounded-md text-center">
               <p>Hey there, what is popping??</p>
               <input
                 type="text"
                 placeholder="Search for a place"
                 className="appearance-none outline-none bg-yellow-950"
-                autoFocus
               />
               <button
                 className="px-4 py-2 bg-orange-600 rounded-full font-bold"
