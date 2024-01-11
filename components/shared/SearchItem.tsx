@@ -3,6 +3,7 @@ import { useSearchStore } from "@/lib/store/store";
 import {
   ChangeEvent,
   KeyboardEvent,
+  MutableRefObject,
   TouchEvent,
   useEffect,
   useRef,
@@ -20,6 +21,7 @@ export default function SearchContainer() {
   const [loading, setLoading] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const suggestionListRef = useRef<HTMLUListElement>(null);
+  const inputRef: MutableRefObject<HTMLInputElement | null> = useRef(null);
 
   const highlightMatchedText = (text: string, query: string) => {
     const regex = new RegExp(`(${query})`, "gi");
@@ -199,6 +201,15 @@ export default function SearchContainer() {
     };
   }, [focusedIndex, results]);
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.onfocus = () => {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+      };
+    }
+  });
+
   return (
     <div
       className={`fixed top-0 left-0 bottom-0 h-full w-full bg-gray-900/70 z-10 overflow-hidden select-none
@@ -229,6 +240,7 @@ export default function SearchContainer() {
               <Icons.search className="h-5 w-5" />
             )}
             <input
+              ref={inputRef}
               type="text"
               placeholder="Search for a place"
               className="flex-1 outline-none appearance-none bg-transparent"
@@ -237,10 +249,6 @@ export default function SearchContainer() {
               onBlur={handleBlur}
               autoCorrect="off"
               autoFocus
-              onFocus={() => {
-                window.scrollTo(0, 0)
-                document.body.scrollTop = 0
-              }}
             />
 
             <div
