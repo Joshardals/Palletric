@@ -1,4 +1,5 @@
 "use client";
+import Search from "@/components/shared/Search";
 import SearchContainer from "@/components/shared/SearchItem";
 import { useSearchStore } from "@/lib/store/store";
 import { KeyboardEvent, useEffect } from "react";
@@ -37,6 +38,7 @@ export default function Home() {
         <p>What good!</p>
         <p>What good!</p>
         <p>What good!</p>
+        <Search />
         {search ? <SearchContainer /> : null}
       </div>
     </main>
