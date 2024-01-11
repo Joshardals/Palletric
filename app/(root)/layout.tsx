@@ -9,8 +9,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className={`flex flex-col h-full`}>
       <Header />
       <div
-        className={`bg-gray-800/40 fixed top-0 left-0  box-border h-full w-full flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300
-          ${search ? " opacity-100 pointer-events-auto" : ""}
+        className={`bg-gray-800/40 fixed top-0 left-0  box-border h-full w-full flex items-center justify-center opacity-0 -z-10 transition-opacity duration-300
+          ${search ? " opacity-100 z-0" : ""}
         `}
       >
         <div className="space-y-4 bg-gray-900 p-5 text-center w-[40rem] max-w-full">
