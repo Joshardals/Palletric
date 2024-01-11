@@ -3,6 +3,7 @@ import Search from "@/components/shared/Search";
 import SearchContainer from "@/components/shared/SearchItem";
 import { useSearchStore } from "@/lib/store/store";
 import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
+import { Input } from "@/components/ui/input";
 
 export default function Home() {
   const { search, setSearch, updateSearch } = useSearchStore();
@@ -74,16 +75,17 @@ export default function Home() {
         }
         `}
       >
-        <div className="bg-white text-black p-5 rounded-md text-center">
+        <div className="bg-black p-5 rounded-md text-center">
           <p>Hey there, what is popping??</p>
-          <input
+          {/* <input
             type="text"
             placeholder="Search for a place"
             className={`appearance-none outline-none bg-yellow-950 ${
               search ? "pointer-events-auto" : "pointer-events-none"
             }`}
             autoFocus
-          />
+          /> */}
+          <Input type="text" placeholder="Search for a place" autoFocus />
           <button
             className="px-4 py-2 bg-orange-600 rounded-full font-bold"
             onClick={() => updateSearch(false)}
