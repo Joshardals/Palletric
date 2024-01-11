@@ -170,7 +170,6 @@ export default function SearchContainer() {
       setUserInput(savedUserInput);
     }
 
-    document.body.classList.toggle("fixed", search);
     document.body.classList.toggle("overflow-hidden", search);
 
     // Add or remove the event listener based on the search state
@@ -181,7 +180,6 @@ export default function SearchContainer() {
     document.addEventListener("keydown", handleKeyDown as any);
 
     return () => {
-      document.body.classList.remove("fixed");
       document.body.classList.remove("overflow-hidden");
 
       document.body.removeEventListener("touchmove", handleTouchMove as any);
@@ -204,9 +202,9 @@ export default function SearchContainer() {
 
   return (
     <div
-      className={`fixed top-0 left-0 bottom-0 h-screen w-screen bg-gray-900/70 z-10 overflow-hidden select-none
-    backdrop-blur-sm justify-centered opacity-0 p-5 sm:px-20
-    ${search && "opacity-100"} 
+      className={`fixed top-0 left-0 bottom-0 h-full w-full bg-gray-900/70 z-10 overflow-hidden select-none
+    backdrop-blur-sm justify-centered opacity-0 pointer-events-none p-5 sm:px-20 transition-opacity duration-300
+    ${search && "opacity-100 pointer-events-auto"} 
     `}
       onClick={() => {
         if (search) {
