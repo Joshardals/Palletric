@@ -47,7 +47,7 @@ export default function Home() {
         <p>What good!</p>
         <p>What good!</p>
 
-        <SearchContainer />
+        {search && <SearchContainer />}
       </div>
     </main>
   );

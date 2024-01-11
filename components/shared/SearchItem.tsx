@@ -153,6 +153,8 @@ export default function SearchContainer() {
   };
 
   useEffect(() => {
+
+    // Additional functionality to prevent touch events (maybe page scrolling when search is active.) on mobile devices. 
     const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
       if (search) {
         e.preventDefault();
@@ -169,7 +171,7 @@ export default function SearchContainer() {
     if (savedUserInput) {
       setUserInput(savedUserInput);
     }
-
+    // Trying to prevent the underlying content from scrolling when search is active.
     document.body.classList.toggle("overflow-hidden", search);
 
     // Add or remove the event listener based on the search state
@@ -203,8 +205,8 @@ export default function SearchContainer() {
   return (
     <div
       className={`fixed top-0 left-0 bottom-0 h-full w-full bg-gray-900/70 z-10 overflow-hidden select-none
-    backdrop-blur-sm justify-centered opacity-0 pointer-events-none p-5 sm:px-20 transition-opacity duration-300
-    ${search && "opacity-100 pointer-events-auto"} 
+    backdrop-blur-sm justify-centered opacity-0 p-5 sm:px-20 transition-opacity duration-300
+    ${search && "opacity-100"} 
     `}
       onClick={() => {
         if (search) {
