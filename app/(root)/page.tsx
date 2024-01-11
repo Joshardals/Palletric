@@ -33,7 +33,7 @@ export default function Home() {
   // Event Listeners for ctrl + k and esc button -- END.
 
   useEffect(() => {
-    document.body.classList.toggle("fixed");
+    document.body.classList.toggle("overflow-hidden", search);
 
     return () => {
       document.body.classList.remove("overflow-hidden");
