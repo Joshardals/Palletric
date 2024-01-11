@@ -8,18 +8,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const { search } = useSearchStore();
   // Inside your SearchContainer component
   const [isVirtualKeyboardActive, setVirtualKeyboardActive] = useState(false);
+  // Inside your Layout component
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   // Inside your useEffect that sets up event listeners
+  // Inside your useEffect in the Layout component
   useEffect(() => {
-    const handleResize = () => {
-      // Check if the viewport height has changed
-      setVirtualKeyboardActive(window.innerHeight < window.screen.height);
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
     };
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -28,6 +30,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       className={`flex flex-col h-full max-md:overflow-auto ${
         (search || isVirtualKeyboardActive) && " overflow-hidden"
       }`}
+      style={{ top: `-${scrollPosition}px` }}
     >
       {/* <Header /> */}
       <main className="flex-1 mt-[7.2rem] sm:mt-[10rem}">{children}</main>
