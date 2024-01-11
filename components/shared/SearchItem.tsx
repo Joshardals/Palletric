@@ -202,7 +202,7 @@ export default function SearchContainer() {
   return (
     <div
       className={`fixed top-0 left-0 bottom-0 h-full w-full bg-gray-900/70 z-10 overflow-hidden select-none
-    backdrop-blur-md justify-centered opacity-0 p-5 sm:px-20
+    backdrop-blur-sm justify-centered opacity-0 p-5 sm:px-20
     ${search && "opacity-100"} 
     `}
       onClick={() => {
