@@ -11,11 +11,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       {search && (
         <div
-          className={`bg-gray-800/40 fixed top-0 left-0  box-border h-full w-full flex items-center justify-center opacity-0 transition-opacity duration-300
-          ${search ? " opacity-100" : ""}
+          className={`bg-gray-800/40 p-10 fixed top-0 left-0  box-border h-full w-full sm:flex sm:items-center sm:justify-center opacity-0 transition-opacity duration-300
+            ${search ? " opacity-100" : ""}
         `}
         >
-          <div className="space-y-4 bg-gray-900 p-5 text-center w-[40rem] max-w-full">
+          <div className="space-y-4 bg-gray-900 p-5 text-center sm:w-[40rem] max-w-full">
             <div>
               <p>Hey there, what is popping??</p>
 
