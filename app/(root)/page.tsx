@@ -67,7 +67,7 @@ export default function Home() {
         {/* {search && <SearchContainer />} */}
 
         <div
-          className={`fixed top-0 left-0 bottom-0 w-full h-full bg-gray-800/60 flex items-center justify-center z-[1000]
+          className={`fixed top-0 left-0 w-full h-full bg-gray-800/60 z-[1000]
         opacity-0 pointer-events-none transition-opacity duration-300 ${
           search && "opacity-100 pointer-events-auto"
         }
