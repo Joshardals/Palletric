@@ -38,6 +38,11 @@ export default function Home() {
         <p>What good!</p>
         <p>What good!</p>
         <p>What good!</p>
+
+        <dialog>
+          <h1>Testing the dialog element</h1>
+          <p>let me see what the future holds while testing this element.</p>
+        </dialog>
         {search ? <SearchContainer /> : null}
       </div>
     </main>
