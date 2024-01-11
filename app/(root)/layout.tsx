@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col max-md:overflow-auto">
+    <div className="flex flex-col h-screen max-md:overflow-auto">
       <Header />
       <main className="flex-1 mt-[7.2rem] sm:mt-[10rem]">{children}</main>
       <Footer />
