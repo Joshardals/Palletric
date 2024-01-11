@@ -36,9 +36,9 @@ export default function Home() {
   useEffect(() => {
     // Prevent body scrolling on iOS Safari when the modal is open
     if (search) {
-      document.body.classList.toggle("fixed");
+      document.body.classList.toggle("overflow-hidden");
     } else {
-      document.body.classList.toggle("relative");
+      document.body.classList.toggle("overflow-auto");
     }
 
     // Additional functionality to prevent touch events
@@ -53,7 +53,7 @@ export default function Home() {
     });
 
     return () => {
-      document.body.classList.remove("fixed");
+      document.body.classList.remove("overflow-hidden");
       document.body.removeEventListener("touchmove", handleTouchMove);
     };
   }, [search]);
@@ -66,24 +66,29 @@ export default function Home() {
 
         {/* {search && <SearchContainer />} */}
 
-        {search && (
-          <div className=" fixed top-0 left-0 bottom-0 w-full h-full bg-gray-800/60 flex items-center justify-center z-[1000]">
-            <div className="bg-white text-black p-5 rounded-md text-center">
-              <p>Hey there, what is popping??</p>
-              <input
-                type="text"
-                placeholder="Search for a place"
-                className="appearance-none outline-none bg-yellow-950"
-              />
-              <button
-                className="px-4 py-2 bg-orange-600 rounded-full font-bold"
-                onClick={() => updateSearch(false)}
-              >
-                Close Modal
-              </button>
-            </div>
+        <div
+          className={`fixed top-0 left-0 bottom-0 w-full h-full bg-gray-800/60 flex items-center justify-center z-[1000]
+        opacity-0 pointer-events-none transition-opacity duration-300 ${
+          search && "opacity-100 pointer-events-auto"
+        }
+        `}
+        >
+          <div className="bg-white text-black p-5 rounded-md text-center">
+            <p>Hey there, what is popping??</p>
+            <input
+              type="text"
+              placeholder="Search for a place"
+              className="appearance-none outline-none bg-yellow-950"
+              autoFocus
+            />
+            <button
+              className="px-4 py-2 bg-orange-600 rounded-full font-bold"
+              onClick={() => updateSearch(false)}
+            >
+              Close Modal
+            </button>
           </div>
-        )}
+        </div>
       </div>
     </main>
   );
