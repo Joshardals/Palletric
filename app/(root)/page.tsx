@@ -32,6 +32,14 @@ export default function Home() {
 
   // Event Listeners for ctrl + k and esc button -- END.
 
+  useEffect(() => {
+    document.body.classList.toggle("fixed");
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [search]);
+
   return (
     <main className="hfPadding h-screen">
       <div className="px-5">
@@ -42,7 +50,7 @@ export default function Home() {
         {/* {search ? <SearchContainer /> : null} */}
 
         <div
-          className={`bg-gray-800/40 fixed top-0 left-0  box-border h-screen w-screen flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300
+          className={`bg-gray-800/40 fixed top-0 left-0  box-border h-full w-full flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300
           ${search ? " opacity-100 pointer-events-auto" : ""}
         `}
         >
