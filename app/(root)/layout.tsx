@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       {search && (
         <div
-          className={`bg-gray-800/40 p-10 fixed top-0 left-0  box-border h-screen w-screen sm:flex sm:items-center sm:justify-center opacity-0 transition-opacity duration-300
+          className={`bg-gray-800/40 p-10 fixed top-0 left-0 bottom-0 box-border h-screen w-screen sm:flex sm:items-center sm:justify-center opacity-0 transition-opacity duration-300
             ${search ? " opacity-100" : ""}
         `}
         >
