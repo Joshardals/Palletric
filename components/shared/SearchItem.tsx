@@ -170,7 +170,7 @@ export default function SearchContainer() {
       setUserInput(savedUserInput);
     }
 
-    document.body.classList.toggle("fixed", search);
+    document.body.classList.toggle("overflow-hidden", search);
 
     // Add or remove the event listener based on the search state
     document.body.addEventListener("touchmove", handleTouchMove as any, {
@@ -180,7 +180,7 @@ export default function SearchContainer() {
     document.addEventListener("keydown", handleKeyDown as any);
 
     return () => {
-      document.body.classList.remove("fixed");
+      document.body.classList.remove("overflow-hidden");
       document.body.removeEventListener("touchmove", handleTouchMove as any);
       document.removeEventListener("keydown", handleKeyDown as any);
     };
