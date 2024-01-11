@@ -3,7 +3,7 @@ import Header from "@/components/shared/Header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`flex flex-col h-full max-md:overflow-auto`}>
+    <div className={`flex flex-col h-full`}>
       <Header />
       <main className="flex-1 mt-[7.2rem] sm:mt-[10rem}">{children}</main>
       <Footer />
