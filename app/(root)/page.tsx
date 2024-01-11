@@ -33,10 +33,11 @@ export default function Home() {
   // Event Listeners for ctrl + k and esc button -- END.
 
   useEffect(() => {
-    document.body.classList.toggle("overflow-hidden", search);
+    // Apply styles to the body based on the search state
+    document.body.style.overflow = search ? "hidden" : "auto";
 
     return () => {
-      document.body.classList.remove("overflow-hidden");
+      document.body.style.overflow = "auto";
     };
   }, [search]);
 
@@ -50,7 +51,8 @@ export default function Home() {
         {/* {search && <SearchContainer />} */}
 
         <div
-          className={`bg-gray-800/40 p-10 fixed overflow-hidden top-0 left-0 bottom-0 box-border h-screen w-screen z-10 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300
+          className={`bg-gray-800/40 p-10 fixed top-0 left-0 bottom-0 box-border h-full w-full 
+          z-10 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300
             ${search ? " opacity-100 pointer-events-auto" : ""}
         `}
         >
