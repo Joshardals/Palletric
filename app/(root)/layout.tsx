@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className={`flex flex-col h-full`}>
       <Header />
 
-      {search && (
+      {/* {search && (
         <div
           className={`bg-gray-800/40 p-10 fixed top-0 left-0 bottom-0 box-border h-screen w-screen flex items-center justify-center opacity-0 transition-opacity duration-300
             ${search ? " opacity-100" : ""}
@@ -35,7 +35,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </button>
           </div>
         </div>
-      )}
+      )} */}
       <main className="flex-1 pt-[7.2rem] sm:pt-[10rem}">{children}</main>
       <Footer />
     </div>
