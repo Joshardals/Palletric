@@ -1,11 +1,8 @@
 "use client";
 import Search from "@/components/shared/Search";
 import SearchContainer from "@/components/shared/SearchItem";
-import ReactModal from "react-modal";
 import { useSearchStore } from "@/lib/store/store";
 import { KeyboardEvent, TouchEvent, useEffect } from "react";
-
-
 
 export default function Home() {
   const { search, setSearch, updateSearch } = useSearchStore();
@@ -35,14 +32,14 @@ export default function Home() {
 
   // Event Listeners for ctrl + k and esc button -- END.
 
-  // useEffect(() => {
-  //   // Apply styles to the body based on the search state
-  //   document.body.classList.toggle("overflow-hidden", search);
+  useEffect(() => {
+    // Apply styles to the body based on the search state
+    document.body.classList.toggle("overflow-hidden", search);
 
-  //   return () => {
-  //     document.body.classList.remove("overflow-hidden");
-  //   };
-  // }, [search]);
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [search]);
 
   return (
     <main className="hfPadding h-screen">
@@ -53,8 +50,8 @@ export default function Home() {
 
         {/* {search && <SearchContainer />} */}
 
-        {/* {search && (
-          <div className=" fixed top-0 left-0 w-full h-full bg-gray-800/60 flex items-center justify-center z-[1000]">
+        {search && (
+          <div className=" fixed top-0 left-0 w-full h-[100svh] bg-gray-800/60 flex items-center justify-center z-[1000]">
             <div className="bg-white text-black p-5 rounded-md text-center">
               <p>Hey there, what is popping??</p>
               <input
@@ -71,36 +68,7 @@ export default function Home() {
               </button>
             </div>
           </div>
-        )} */}
-
-        <ReactModal
-          isOpen={search}
-          onRequestClose={() => updateSearch(false)}
-          style={{
-            content: {
-              top: "50%",
-              left: "50%",
-              right: "auto",
-              bottom: "auto",
-              marginRight: "-50%",
-              transform: "translate(-50%, -50%)",
-            },
-          }}
-        >
-          <p>Hey there, what is popping??</p>
-          <input
-            type="text"
-            placeholder="Search for a place"
-            className="appearance-none outline-none bg-yellow-950"
-            autoFocus
-          />
-          <button
-            className="px-4 py-2 bg-orange-600 rounded-full font-bold"
-            onClick={() => updateSearch(false)}
-          >
-            Close Modal
-          </button>
-        </ReactModal>
+        )}
       </div>
     </main>
   );
