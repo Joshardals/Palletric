@@ -78,7 +78,9 @@ export default function Home() {
             <input
               type="text"
               placeholder="Search for a place"
-              className="appearance-none outline-none bg-yellow-950"
+              className={`appearance-none outline-none bg-yellow-950 ${
+                search ? "pointer-events-auto" : "pointer-events-none"
+              }`}
               autoFocus
             />
             <button
