@@ -39,7 +39,26 @@ export default function Home() {
         <p>What good!</p>
         <p>What good!</p>
 
-        {search ? <SearchContainer /> : null}
+        {/* {search ? <SearchContainer /> : null} */}
+
+        <div
+          className={`bg-gray-800/40 fixed top-0 left-0  box-border h-screen w-screen flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300
+          ${search ? " opacity-100 pointer-events-auto" : ""}
+        `}
+        >
+          <div className="space-y-4 bg-gray-900 p-5 text-center w-[40rem] max-w-full">
+            <div>
+              <p>Hey there, what is popping??</p>
+            </div>
+
+            <button
+              className="px-4 py-2 bg-orange-600 rounded-full font-bold"
+              onClick={setSearch}
+            >
+              Close Modal
+            </button>
+          </div>
+        </div>
       </div>
     </main>
   );
