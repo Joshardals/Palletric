@@ -4,6 +4,7 @@ import SearchContainer from "@/components/shared/SearchItem";
 import { useSearchStore } from "@/lib/store/store";
 import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
+import DialogSearch from "@/components/shared/DialogSearch";
 
 export default function Home() {
   const { search, setSearch, updateSearch } = useSearchStore();
@@ -34,33 +35,33 @@ export default function Home() {
 
   // Event Listeners for ctrl + k and esc button -- END.
 
-  useEffect(() => {
-    // Prevent body scrolling on iOS Safari when the modal is open
-    if (search) {
-      document.body.classList.toggle("overflow-hidden");
-    } else {
-      document.body.classList.toggle("overflow-auto");
-    }
+  // useEffect(() => {
+  //   // Prevent body scrolling on iOS Safari when the modal is open
+  //   if (search) {
+  //     document.body.classList.toggle("overflow-hidden");
+  //   } else {
+  //     document.body.classList.toggle("overflow-auto");
+  //   }
 
-    // Additional functionality to prevent touch events
-    const handleTouchMove = (e: any) => {
-      if (search) {
-        e.preventDefault();
-      }
-    };
+  //   // Additional functionality to prevent touch events
+  //   const handleTouchMove = (e: any) => {
+  //     if (search) {
+  //       e.preventDefault();
+  //     }
+  //   };
 
-    document.body.addEventListener("touchmove", handleTouchMove, {
-      passive: false,
-    });
+  //   document.body.addEventListener("touchmove", handleTouchMove, {
+  //     passive: false,
+  //   });
 
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-      document.body.removeEventListener("touchmove", handleTouchMove);
-    };
-  }, [search]);
+  //   return () => {
+  //     document.body.classList.remove("overflow-hidden");
+  //     document.body.removeEventListener("touchmove", handleTouchMove);
+  //   };
+  // }, [search]);
   return (
     <main className="hfPadding">
-      <div className="px-5 space-y-[20rem]">
+      <div className="px-5">
         <p>What good!</p>
         <p>What good!</p>
         <p>What good!</p>
@@ -68,7 +69,7 @@ export default function Home() {
         {/* {search && <SearchContainer />} */}
       </div>
 
-      <div
+      {/* <div
         className={`fixed top-0 left-0 w-full h-full bg-gray-800/60 z-[1000]
         opacity-0 pointer-events-none transition-opacity duration-300 ${
           search && "opacity-100 pointer-events-auto"
@@ -77,14 +78,14 @@ export default function Home() {
       >
         <div className="bg-black p-5 rounded-md text-center">
           <p>Hey there, what is popping??</p>
-          {/* <input
+          <input
             type="text"
             placeholder="Search for a place"
             className={`appearance-none outline-none bg-yellow-950 ${
               search ? "pointer-events-auto" : "pointer-events-none"
             }`}
             autoFocus
-          /> */}
+          />
           <Input type="text" placeholder="Search for a place" autoFocus />
           <button
             className="px-4 py-2 bg-orange-600 rounded-full font-bold"
@@ -93,7 +94,9 @@ export default function Home() {
             Close Modal
           </button>
         </div>
-      </div>
+      </div> */}
+
+      <DialogSearch />
     </main>
   );
 }
