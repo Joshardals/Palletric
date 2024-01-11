@@ -58,7 +58,7 @@ export default function Home() {
     };
   }, [search]);
   return (
-    <main className="hfPadding h-full">
+    <main className="hfPadding">
       <div className="px-5 space-y-[20rem]">
         <p>What good!</p>
         <p>What good!</p>
