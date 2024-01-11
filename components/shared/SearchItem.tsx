@@ -237,6 +237,10 @@ export default function SearchContainer() {
               onBlur={handleBlur}
               autoCorrect="off"
               autoFocus
+              onFocus={() => {
+                window.scrollTo(0, 0)
+                document.body.scrollTop = 0
+              }}
             />
 
             <div

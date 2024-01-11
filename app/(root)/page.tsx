@@ -38,7 +38,6 @@ export default function Home() {
         <p>What good!</p>
         <p>What good!</p>
         <p>What good!</p>
-        <Search />
         {search ? <SearchContainer /> : null}
       </div>
     </main>
