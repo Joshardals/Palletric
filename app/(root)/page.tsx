@@ -2,10 +2,11 @@
 import Search from "@/components/shared/Search";
 import SearchContainer from "@/components/shared/SearchItem";
 import { useSearchStore } from "@/lib/store/store";
-import { KeyboardEvent, TouchEvent, useEffect } from "react";
+import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
 
 export default function Home() {
   const { search, setSearch, updateSearch } = useSearchStore();
+  const modalRef = useRef<HTMLUListElement>(null);
 
   // Event Listeners for ctrl + k and esc button -- START.
 
@@ -33,11 +34,22 @@ export default function Home() {
   // Event Listeners for ctrl + k and esc button -- END.
 
   useEffect(() => {
-    // Apply styles to the body based on the search state
-    document.body.classList.toggle("overflow-hidden", search);
+    // Prevent touch events on the modal from bubbling to the body
+    const handleModalTouchMove = (e: any) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
+
+    if (modalRef.current) {
+      modalRef.current.addEventListener("touchmove", handleModalTouchMove, {
+        passive: false,
+      });
+    }
 
     return () => {
-      document.body.classList.remove("overflow-hidden");
+      if (modalRef.current) {
+        modalRef.current.removeEventListener("touchmove", handleModalTouchMove);
+      }
     };
   }, [search]);
 
