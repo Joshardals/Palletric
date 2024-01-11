@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={`flex flex-col h-full max-md:overflow-auto ${
-        search && "fixed"
+        search && ""
       }`}
     >
       {/* <Header /> */}
