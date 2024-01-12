@@ -153,8 +153,7 @@ export default function SearchContainer() {
   };
 
   useEffect(() => {
-
-    // Additional functionality to prevent touch events (maybe page scrolling when search is active.) on mobile devices. 
+    // Additional functionality to prevent touch events (maybe page scrolling when search is active.) on mobile devices.
     const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
       if (search) {
         e.preventDefault();
@@ -215,7 +214,7 @@ export default function SearchContainer() {
       }}
     >
       <div
-        className={`flex flex-col items-start bg-gray-900 rounded-2xl w-full sm:mx-auto sm:max-w-[50rem] transitionAll border border-gray-800 ${
+        className={`bg-gray-900 rounded-2xl w-full sm:mx-auto sm:max-w-[50rem] transitionAll border border-gray-800 ${
           !(results?.length > 0) && "space-y-4"
         }  `}
         onClick={(e) => {

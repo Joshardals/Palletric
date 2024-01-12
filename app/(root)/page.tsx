@@ -33,30 +33,6 @@ export default function Home() {
 
   // Event Listeners for ctrl + k and esc button -- END.
 
-  useEffect(() => {
-    // Prevent body scrolling on iOS Safari when the modal is open
-    if (search) {
-      document.body.classList.toggle("overflow-hidden");
-    } else {
-      document.body.classList.toggle("overflow-auto");
-    }
-
-    // Additional functionality to prevent touch events
-    const handleTouchMove = (e: any) => {
-      if (search) {
-        e.preventDefault();
-      }
-    };
-
-    document.body.addEventListener("touchmove", handleTouchMove, {
-      passive: false,
-    });
-
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-      document.body.removeEventListener("touchmove", handleTouchMove);
-    };
-  }, [search]);
   return (
     <main className="hfPadding h-screen">
       <div className="px-5">
