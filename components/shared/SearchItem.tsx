@@ -164,7 +164,7 @@ export default function SearchContainer() {
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-      if (e.ctrlKey && e.key === "k") {
+      if (e.ctrlKey && e.key === "k" && !loadingLoc) {
         updateSearch(false);
       }
     };
@@ -189,7 +189,7 @@ export default function SearchContainer() {
       document.body.removeEventListener("touchmove", handleTouchMove as any);
       document.removeEventListener("keydown", handleKeyDown as any);
     };
-  }, [search]);
+  }, [search, loadingLoc]);
 
   useEffect(() => {
     localStorage.setItem("userInput", userInput);
@@ -207,7 +207,7 @@ export default function SearchContainer() {
   return (
     <div
       className={`max-sm:absolute fixed top-0 left-0 bottom-0 h-full w-full bg-gray-900/70 z-10 overflow-hidden select-none
-    backdrop-blur-sm sm:justify-centered opacity-0 pointer-events-none p-5 sm:px-20 transition-opacity duration-300
+    backdrop-blur-sm sm:justify-centered opacity-0 pointer-events-none p-5 sm:px-20 transition-opacity duration-300 ease-out
     ${search && "opacity-100 pointer-events-auto"} 
     `}
       onClick={() => {

@@ -1,10 +1,11 @@
 "use client";
 import SearchContainer from "@/components/shared/SearchItem";
-import { useSearchStore } from "@/lib/store/store";
+import { useLocationLoading, useSearchStore } from "@/lib/store/store";
 import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
 
 export default function Home() {
   const { search, setSearch, updateSearch } = useSearchStore();
+  const { loadingLoc } = useLocationLoading();
 
   // Event Listeners for ctrl + k and esc button -- START.
 
@@ -17,7 +18,7 @@ export default function Home() {
 
       // Well now, ctrl + k closes the search container as well. Check the SearchContainer component.
 
-      if (e.key === "Escape") {
+      if (e.key === "Escape" && !loadingLoc) {
         updateSearch(false);
       }
     };
@@ -27,7 +28,7 @@ export default function Home() {
     return () => {
       document.removeEventListener("keydown", handleKeyDown as any);
     };
-  }, []);
+  }, [loadingLoc]);
 
   // Event Listeners for ctrl + k and esc button -- END.
 
