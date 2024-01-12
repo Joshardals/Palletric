@@ -30,11 +30,11 @@ export default function CurrentLocation() {
   return (
     <div
       className="relative bg-gradient-to-r from-[#F59E0B] to-[#6BA54C]  p-[0.1rem] rounded-md cursor-pointer
-      transitionAll mx-5 w-[12.6rem] h-[20rem]"
+      transitionAll mx-5 w-[12.6rem]"
     >
       <button
         type="button"
-        className={` bg-gray-900 px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full min-h-full
+        className={` bg-gray-900 px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full
             transitionAll ${loadingLoc && "animate-pulse"}
         `}
         onClick={handleCurrentLocationClick}
