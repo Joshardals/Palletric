@@ -68,7 +68,7 @@
 
 html,
 body {
-  @apply min-h-screen w-full bg-gray-950 font-sans text-[14px] 
+  @apply min-h-screen w-full bg-gray-950 font-sans text-[16px] max-md:text-[15px]
   text-white/70 scroll-smooth p-0 m-0 select-none box-border;
 }
 
