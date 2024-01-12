@@ -34,7 +34,7 @@ export default function CurrentLocation() {
     >
       <button
         type="button"
-        className={` bg-gray-900 px-4 py-10 rounded-md flex items-center justify-center space-x-2 w-full
+        className={` bg-gray-900 px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full
             transitionAll ${loadingLoc && "animate-pulse"}
         `}
         onClick={handleCurrentLocationClick}
