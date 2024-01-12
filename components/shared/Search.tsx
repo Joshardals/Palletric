@@ -1,9 +1,10 @@
 "use client";
 import { useSearchStore } from "@/lib/store/store";
 import { Icons } from "../ui/icons";
+import Image from "next/image";
 
 export default function Search() {
-  const { search, setSearch } = useSearchStore();
+  const { setSearch } = useSearchStore();
   return (
     <div>
       <div
@@ -11,15 +12,23 @@ export default function Search() {
     cursor-pointer rounded-lg max-md:space-x-2 md:w-[14rem] hover:bg-gray-700/80 max-sm:hidden"
         onClick={setSearch}
       >
-        <Icons.search className="h-5 w-5" />
+        <Image
+          src="/assets/icons/search.svg"
+          width={18}
+          height={18}
+          alt="Search"
+        />
         <p>Enter location</p>
         <p className="max-md:hidden">Ctrl K</p>
       </div>
 
       {/* Mobile Screens */}
-      <Icons.search
-        className="h-5 w-5 sm:hidden cursor-pointer"
-        onClick={setSearch}
+      <Image
+        src="/assets/icons/search.svg"
+        width={18}
+        height={18}
+        alt="Search"
+        className="sm:hidden cursor-pointer"
       />
     </div>
   );

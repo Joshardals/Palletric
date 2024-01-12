@@ -12,6 +12,7 @@ import debounce from "lodash.debounce";
 import { fetchAutoCompleteFunction } from "@/lib/hooks";
 import { LocationResult } from "@/typings";
 import { Icons } from "../ui/icons";
+import Image from "next/image";
 
 export default function SearchContainer() {
   const { search, setSearch, updateSearch } = useSearchStore();
@@ -203,7 +204,7 @@ export default function SearchContainer() {
 
   return (
     <div
-      className={`absolute top-0 left-0 bottom-0 h-full w-full bg-gray-900/70 z-10 overflow-hidden select-none
+      className={`max-sm:absolute fixed top-0 left-0 bottom-0 h-full w-full bg-gray-900/70 z-10 overflow-hidden select-none
     backdrop-blur-sm sm:justify-centered opacity-0 p-5 sm:px-20 transition-opacity duration-300
     ${search && "opacity-100"} 
     `}
@@ -228,7 +229,12 @@ export default function SearchContainer() {
             {loading ? (
               <Icons.spinner className="h-5 w-5  text-[#F59E0B] animate-spin" />
             ) : (
-              <Icons.search className="h-5 w-5" />
+              <Image
+                src="/assets/icons/search.svg"
+                width={18}
+                height={18}
+                alt="Search"
+              />
             )}
             <input
               type="text"
