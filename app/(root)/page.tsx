@@ -1,12 +1,10 @@
 "use client";
-import Search from "@/components/shared/Search";
 import SearchContainer from "@/components/shared/SearchItem";
 import { useSearchStore } from "@/lib/store/store";
 import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
 
 export default function Home() {
   const { search, setSearch, updateSearch } = useSearchStore();
-  const modalRef = useRef<HTMLUListElement>(null);
 
   // Event Listeners for ctrl + k and esc button -- START.
 

@@ -171,7 +171,7 @@ export default function SearchContainer() {
       setUserInput(savedUserInput);
     }
     // Trying to prevent the underlying content from scrolling when search is active.
-    document.body.classList.toggle("overflow-hidden", search);
+    document.body.classList.toggle("fixed", search);
 
     // Add or remove the event listener based on the search state
     document.body.addEventListener("touchmove", handleTouchMove as any, {
@@ -181,7 +181,7 @@ export default function SearchContainer() {
     document.addEventListener("keydown", handleKeyDown as any);
 
     return () => {
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove("fixed");
 
       document.body.removeEventListener("touchmove", handleTouchMove as any);
       document.removeEventListener("keydown", handleKeyDown as any);
@@ -204,7 +204,7 @@ export default function SearchContainer() {
   return (
     <div
       className={`fixed top-0 left-0 bottom-0 h-full w-full bg-gray-900/70 z-10 overflow-hidden select-none
-    backdrop-blur-sm justify-centered opacity-0 p-5 sm:px-20 transition-opacity duration-300
+    backdrop-blur-sm sm:justify-centered opacity-0 p-5 sm:px-20 transition-opacity duration-300
     ${search && "opacity-100"} 
     `}
       onClick={() => {
