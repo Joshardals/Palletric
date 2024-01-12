@@ -227,7 +227,7 @@ export default function SearchContainer() {
         <div className="flex flex-col w-full border-b border-b-gray-800 p-5">
           <div className="flex items-center space-x-4">
             {loading ? (
-              <Icons.spinner className="h-5 w-5  text-[#F59E0B] animate-spin" />
+              <Icons.spinner className="h-6 w-6  text-[#F59E0B] animate-spin" />
             ) : (
               <Image
                 src="/assets/icons/search.svg"
@@ -288,11 +288,11 @@ export default function SearchContainer() {
           )}
           <div
             className=" bg-gradient-to-r from-[#F59E0B] to-[#6BA54C]  p-[0.1rem] rounded-md cursor-pointer
-              hover:bg-gradient-to-r hover:from-[#6BA54C] hover:to-[#F59E0B] max-w-[10.033rem]
-          mx-5"
+              transitionAll  hover:bg-gradient-to-r hover:from-[#6BA54C] hover:to-[#F59E0B] mx-5 w-[12.6rem]"
           >
-            <button className="bg-gray-900 px-4 py-2 rounded-md">
-              Current Location
+            <button className="bg-gray-900 px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full">
+              <Icons.location className="h-5 w-5" />
+              <p> Current Location</p>
             </button>
           </div>
         </div>
