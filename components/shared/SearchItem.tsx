@@ -207,19 +207,19 @@ export default function SearchContainer() {
   return (
     <div
       className={`max-sm:absolute fixed top-0 left-0 bottom-0 h-full w-full bg-gray-900/70 z-10 overflow-hidden select-none
-    backdrop-blur-sm sm:justify-centered opacity-0 p-5 sm:px-20 transition-opacity duration-300
-    ${search && "opacity-100"} 
+    backdrop-blur-sm sm:justify-centered opacity-0 pointer-events-none p-5 sm:px-20 transition-opacity duration-300
+    ${search && "opacity-100 pointer-events-auto"} 
     `}
       onClick={() => {
-        if (search) {
+        if (search && !loadingLoc) {
           setSearch();
         }
       }}
     >
       <div
-        className={`bg-gray-900 rounded-2xl w-full sm:mx-auto sm:max-w-[50rem] transitionAll border border-gray-800 ${
+        className={`relative bg-gray-900 rounded-2xl w-full sm:mx-auto sm:max-w-[50rem] transitionAll border border-gray-800 ${
           !(results?.length > 0) && "space-y-4"
-        }  `}
+        } `}
         onClick={(e) => {
           if (search) {
             e.stopPropagation();
@@ -227,7 +227,7 @@ export default function SearchContainer() {
         }}
       >
         <div className="flex flex-col w-full border-b border-b-gray-800 p-5">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4">
             {loading ? (
               <Icons.spinner className="h-6 w-6  text-[#F59E0B] animate-spin" />
             ) : (
@@ -236,15 +236,12 @@ export default function SearchContainer() {
             <input
               type="text"
               placeholder="Search for a place"
-              className={`flex-1 outline-none bg-transparent ${
-                loadingLoc && "cursor-not-allowed"
-              }`}
+              className={`flex-1 outline-none bg-transparent `}
               value={userInput}
               onChange={handleInputChange}
               onBlur={handleBlur}
               autoCorrect="off"
               autoFocus
-              disabled={loadingLoc}
             />
 
             <div
@@ -295,6 +292,10 @@ export default function SearchContainer() {
           )}
           <CurrentLocation />
         </div>
+
+        {loadingLoc && (
+          <div className="absolute top-0 left-0 cursor-not-allowed bg-transparent  h-full w-full rounded-md" />
+        )}
       </div>
     </div>
   );

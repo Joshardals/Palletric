@@ -46,10 +46,6 @@ export default function CurrentLocation() {
         )}
         {loadingLoc ? <p> Locating you...</p> : <p> Current Location</p>}
       </button>
-
-      {loadingLoc && (
-        <div className="absolute top-0 left-0 cursor-not-allowed bg-transparent  h-full w-full rounded-md" />
-      )}
     </div>
   );
 }
