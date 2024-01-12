@@ -8,3 +8,8 @@ export interface LocationResult {
   place_id: string;
   display_name: string;
 }
+
+export interface LocationLoadingState {
+  loadingLoc: boolean;
+  updateLoading: (loading: LocationLoadingState["loadingLoc"]) => void;
+}

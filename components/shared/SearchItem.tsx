@@ -1,5 +1,5 @@
 "use client";
-import { useSearchStore } from "@/lib/store/store";
+import { useLocationLoading, useSearchStore } from "@/lib/store/store";
 import {
   ChangeEvent,
   KeyboardEvent,
@@ -20,6 +20,7 @@ export default function SearchContainer() {
   const [userInput, setUserInput] = useState("");
   const [results, setResults] = useState<LocationResult[]>([]);
   const [loading, setLoading] = useState(false);
+  const { loadingLoc } = useLocationLoading();
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const suggestionListRef = useRef<HTMLUListElement>(null);
 
@@ -235,13 +236,23 @@ export default function SearchContainer() {
             <input
               type="text"
               placeholder="Search for a place"
-              className="flex-1 outline-none appearance-none bg-transparent"
+              className={`flex-1 outline-none bg-transparent ${
+                loadingLoc && "cursor-not-allowed"
+              }`}
               value={userInput}
               onChange={handleInputChange}
               onBlur={handleBlur}
               autoCorrect="off"
               autoFocus
+              disabled={loadingLoc}
             />
+
+            <div
+              className="bg-gray-700/80 transitionAll cursor-pointer p-1 rounded-md"
+              onClick={() => setUserInput("")}
+            >
+              <Icons.xMark />
+            </div>
 
             <div
               className=" bg-gray-700/80 transitionAll cursor-pointer py-1 px-4 rounded-md"

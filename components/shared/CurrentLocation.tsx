@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
 import { Icons } from "../ui/icons";
+import { useLocationLoading } from "@/lib/store/store";
 
 export default function CurrentLocation() {
-  const [loading, setLoading] = useState(false);
+  const { loadingLoc, updateLoading } = useLocationLoading();
 
   const handleCurrentLocationClick = () => {
-    setLoading(true);
+    updateLoading(true);
     setTimeout(() => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -23,7 +24,7 @@ export default function CurrentLocation() {
       } else {
         alert("Geolocation is not supported by your browser");
       }
-      setLoading(false);
+      updateLoading(false);
     }, 5000);
   };
   return (
@@ -34,19 +35,19 @@ export default function CurrentLocation() {
       <button
         type="button"
         className={` bg-gray-900 px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full
-            transitionAll ${loading && "animate-pulse"}
+            transitionAll ${loadingLoc && "animate-pulse"}
         `}
         onClick={handleCurrentLocationClick}
       >
-        {loading ? (
+        {loadingLoc ? (
           <Icons.spinner className="h-6 w-6  text-[#F59E0B] animate-spin" />
         ) : (
           <Icons.location className="h-5 w-5" />
         )}
-        {loading ? <p> Locating you...</p> : <p> Current Location</p>}
+        {loadingLoc ? <p> Locating you...</p> : <p> Current Location</p>}
       </button>
 
-      {loading && (
+      {loadingLoc && (
         <div className="absolute top-0 left-0 cursor-not-allowed bg-transparent  h-full w-full rounded-md" />
       )}
     </div>
