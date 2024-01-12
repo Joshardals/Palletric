@@ -3,8 +3,6 @@ import Search from "@/components/shared/Search";
 import SearchContainer from "@/components/shared/SearchItem";
 import { useSearchStore } from "@/lib/store/store";
 import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
-import { Input } from "@/components/ui/input";
-import DialogSearch from "@/components/shared/DialogSearch";
 
 export default function Home() {
   const { search, setSearch, updateSearch } = useSearchStore();
@@ -69,7 +67,7 @@ export default function Home() {
         {/* {search && <SearchContainer />} */}
       </div>
 
-      {/* <div
+      <div
         className={`fixed top-0 left-0 w-full h-full bg-gray-800/60 z-[1000]
         opacity-0 pointer-events-none transition-opacity duration-300 ${
           search && "opacity-100 pointer-events-auto"
@@ -86,7 +84,7 @@ export default function Home() {
             }`}
             autoFocus
           />
-          <Input type="text" placeholder="Search for a place" autoFocus />
+
           <button
             className="px-4 py-2 bg-orange-600 rounded-full font-bold"
             onClick={() => updateSearch(false)}
@@ -94,9 +92,7 @@ export default function Home() {
             Close Modal
           </button>
         </div>
-      </div> */}
-
-      <DialogSearch />
+      </div>
     </main>
   );
 }
