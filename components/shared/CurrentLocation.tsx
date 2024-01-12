@@ -45,6 +45,10 @@ export default function CurrentLocation() {
         )}
         {loading ? <p> Locating you...</p> : <p> Current Location</p>}
       </button>
+
+      {loading && (
+        <div className="absolute top-0 left-0 cursor-not-allowed bg-transparent  h-full w-full rounded-md" />
+      )}
     </div>
   );
 }
