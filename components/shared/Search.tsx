@@ -29,6 +29,7 @@ export default function Search() {
         height={18}
         alt="Search"
         className="sm:hidden cursor-pointer"
+        onClick={setSearch}
       />
     </div>
   );
