@@ -35,9 +35,7 @@ export default function Home() {
   return (
     <main className="hfPadding h-screen">
       <div className="px-5">
-        <p>What good!</p>
-        <p>What good!</p>
-        <p>What good!</p>
+        <p>Palletric&apos;s algorithm coming soon!</p>
 
         <SearchContainer />
       </div>
