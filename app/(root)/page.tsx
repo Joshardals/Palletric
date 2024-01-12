@@ -64,34 +64,7 @@ export default function Home() {
         <p>What good!</p>
         <p>What good!</p>
 
-        {/* {search && <SearchContainer />} */}
-
-        {search && (
-          <div
-            className={`fixed top-0 left-0 w-full h-full bg-gray-800/60 z-[1000]
-        opacity-0 transition-opacity duration-300 ${search && "opacity-100"}
-        `}
-          >
-            <div className="bg-black p-5 rounded-md text-center">
-              <p>Hey there, what is popping??</p>
-              <input
-                type="text"
-                placeholder="Search for a place"
-                className={`appearance-none outline-none bg-yellow-950 ${
-                  search ? "pointer-events-auto" : "pointer-events-none"
-                }`}
-                autoFocus
-              />
-
-              <button
-                className="px-4 py-2 bg-orange-600 rounded-full font-bold"
-                onClick={() => updateSearch(false)}
-              >
-                Close Modal
-              </button>
-            </div>
-          </div>
-        )}
+        {search && <SearchContainer />}
       </div>
     </main>
   );
