@@ -23,13 +23,9 @@ export default function Search() {
       </div>
 
       {/* Mobile Screens */}
-      <Image
-        src="/assets/icons/search.svg"
-        width={18}
-        height={18}
-        alt="Search"
-        className="sm:hidden cursor-pointer"
+      <Icons.search
         onClick={setSearch}
+        className="sm:hidden cursor-pointer h-6 w-6"
       />
     </div>
   );

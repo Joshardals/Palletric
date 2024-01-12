@@ -13,6 +13,7 @@ import { fetchAutoCompleteFunction } from "@/lib/hooks";
 import { LocationResult } from "@/typings";
 import { Icons } from "../ui/icons";
 import Image from "next/image";
+import CurrentLocation from "./CurrentLocation";
 
 export default function SearchContainer() {
   const { search, setSearch, updateSearch } = useSearchStore();
@@ -229,12 +230,7 @@ export default function SearchContainer() {
             {loading ? (
               <Icons.spinner className="h-6 w-6  text-[#F59E0B] animate-spin" />
             ) : (
-              <Image
-                src="/assets/icons/search.svg"
-                width={18}
-                height={18}
-                alt="Search"
-              />
+              <Icons.search className="h-6 w-6" />
             )}
             <input
               type="text"
@@ -286,15 +282,7 @@ export default function SearchContainer() {
               </ul>
             </div>
           )}
-          <div
-            className=" bg-gradient-to-r from-[#F59E0B] to-[#6BA54C]  p-[0.1rem] rounded-md cursor-pointer
-              transitionAll  hover:bg-gradient-to-r hover:from-[#6BA54C] hover:to-[#F59E0B] mx-5 w-[12.6rem]"
-          >
-            <button className="bg-gray-900 px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full">
-              <Icons.location className="h-5 w-5" />
-              <p> Current Location</p>
-            </button>
-          </div>
+          <CurrentLocation />
         </div>
       </div>
     </div>
