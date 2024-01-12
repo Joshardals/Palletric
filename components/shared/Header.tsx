@@ -15,7 +15,7 @@ export default function Header() {
             alt="Palletric Logo"
             width={30}
             height={30}
-            className=""
+            className=" max-sm:h-6 max-sm:w-6"
           />
           <h1 className="h1-bold">Palletric</h1>
         </Link>

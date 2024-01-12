@@ -8,13 +8,19 @@ export default function Search() {
     <div>
       <div
         className="bg-gray-700/50 py-2 px-4 flex items-center justify-between
-    cursor-pointer rounded-lg max-md:space-x-2 md:w-[14rem] hover:bg-gray-700/80"
+    cursor-pointer rounded-lg max-md:space-x-2 md:w-[14rem] hover:bg-gray-700/80 max-sm:hidden"
         onClick={setSearch}
       >
         <Icons.search className="h-5 w-5" />
         <p>Enter location</p>
         <p className="max-md:hidden">Ctrl K</p>
       </div>
+
+      {/* Mobile Screens */}
+      <Icons.search
+        className="h-5 w-5 sm:hidden cursor-pointer"
+        onClick={setSearch}
+      />
     </div>
   );
 }
