@@ -69,9 +69,7 @@ export default function Home() {
         {search && (
           <div
             className={`fixed top-0 left-0 w-full h-full bg-gray-800/60 z-[1000]
-        opacity-0 transition-opacity duration-300 flex items-center justify-center ${
-          search && "opacity-100"
-        }
+        opacity-0 transition-opacity duration-300 ${search && "opacity-100"}
         `}
           >
             <div className="bg-black p-5 rounded-md text-center">
