@@ -36,9 +36,9 @@ export default function Home() {
   useEffect(() => {
     // Prevent body scrolling on iOS Safari when the modal is open
     if (search) {
-      document.body.classList.toggle("fixed");
+      document.body.classList.toggle("overflow-hidden");
     } else {
-      document.body.classList.toggle("relative");
+      document.body.classList.toggle("overflow-auto");
     }
 
     // Additional functionality to prevent touch events
@@ -53,7 +53,7 @@ export default function Home() {
     });
 
     return () => {
-      document.body.classList.remove("fixed");
+      document.body.classList.remove("overflow-hidden");
       document.body.removeEventListener("touchmove", handleTouchMove);
     };
   }, [search]);
@@ -68,7 +68,7 @@ export default function Home() {
 
         <div
           className={`fixed top-0 left-0 w-full h-full bg-gray-800/60 z-[1000]
-        opacity-0 pointer-events-none transition-opacity duration-300 ${
+        opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center ${
           search && "opacity-100 pointer-events-auto"
         }
         `}
