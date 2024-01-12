@@ -40,13 +40,16 @@ export default function CurrentLocation() {
         onClick={handleCurrentLocationClick}
       >
         {loadingLoc ? (
-          <div className=" static">
-            <Icons.spinner className="h-6 w-6  text-[#F59E0B] animate-spin" />
+          <div className="space-x-2 justify-centered">
+            <Icons.spinner className="h-6 w-6 text-[#F59E0B] animate-spin" />
+            <p> Locating you...</p>
           </div>
         ) : (
-          <Icons.location className="h-5 w-5" />
+          <div className="space-x-2 justify-centered">
+            <Icons.location className="h-5 w-5" />
+            <p> Current Location</p>
+          </div>
         )}
-        {loadingLoc ? <p> Locating you...</p> : <p> Current Location</p>}
       </button>
     </div>
   );
