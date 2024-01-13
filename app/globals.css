@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply min-h-screen w-full bg-gray-950 font-sans text-[16px] sm:text-sm
+  @apply min-h-screen w-full bg-gray-950 font-sans max-sm:text-sm
   text-white/70 scroll-smooth p-0 m-0 select-none box-border;
 }
 

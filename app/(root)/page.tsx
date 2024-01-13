@@ -36,8 +36,7 @@ export default function Home() {
 
   return (
     <main className="hfPadding">
-      <div className="sm:px-20 flex flex-col space-y-6 items-center justify-center">
-        <h1 className="h1-bold">Palettes</h1>
+      <div className="sm:px-20 flex flex-col items-center justify-center">
         <Palettes />
         <SearchContainer />
       </div>
