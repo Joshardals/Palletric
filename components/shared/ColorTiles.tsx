@@ -8,7 +8,7 @@ export default function ColorTiles() {
         <div className=" bg-orange-950 rounded-md flex-1" />
         <div className="text-center p-1">color code</div>
       </div>
-      {/* Where I will display the color codes on mobile devices */}
+      {/* Where I will display the color codes on mobile devices */}c
     </div>
   );
 }
