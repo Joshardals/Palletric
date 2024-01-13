@@ -228,9 +228,9 @@ export default function SearchContainer() {
         <div className="flex flex-col w-full border-b border-b-gray-800 p-5">
           <div className="flex items-center space-x-2 sm:space-x-4">
             {loading ? (
-              <Icons.spinner className="h-6 w-6  text-[#F59E0B] animate-spin" />
+              <Icons.spinner className=" text-[#F59E0B] animate-spin h-4 w-4 sm:h-5 sm:w-5" />
             ) : (
-              <Icons.search className="h-6 w-6" />
+              <Icons.search className="h-4 w-4 sm:h-5 sm:w-5" />
             )}
             <input
               type="text"
