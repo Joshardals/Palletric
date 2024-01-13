@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
 import { Icons } from "../ui/icons";
-import { useLocationLoading } from "@/lib/store/store";
+import { useLocationLoading, useSearchStore } from "@/lib/store/store";
 
 export default function CurrentLocation() {
   const { loadingLoc, updateLoading } = useLocationLoading();
+  const { updateSearch } = useSearchStore();
 
   const handleCurrentLocationClick = () => {
     updateLoading(true);
@@ -25,6 +26,7 @@ export default function CurrentLocation() {
         alert("Geolocation is not supported by your browser");
       }
       updateLoading(false);
+      updateSearch(false);
     }, 5000);
   };
   return (
