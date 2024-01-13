@@ -7,7 +7,6 @@ export const Icons = {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="max-sm:h-4 max-sm:w-4 h-5 w-5"
       {...props}
     >
       <path
@@ -28,7 +27,6 @@ export const Icons = {
       width="24"
       height="24"
       viewBox="0 0 256 256"
-      className="max-sm:h-4 max-sm:w-4 h-5 w-5"
       {...props}
     >
       <g fillOpacity="0.70196" fill="#FFFFFFB3" fillRule="nonzero">
@@ -49,7 +47,6 @@ export const Icons = {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className=" h-4 w-4"
       {...props}
     >
       <path d="M21 12a9 9 0 1 1-6.219-8.56" />
@@ -60,7 +57,6 @@ export const Icons = {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      className="max-sm:h-4 max-sm:w-4 h-5 w-5"
       {...props}
     >
       <path
