@@ -9,11 +9,12 @@ body {
 }
 
 @layer utilities {
-  .h1-bold {
-    @apply font-mono text-white font-medium text-[20px] max-sm:text-[18px];
+  .animateTiles {
+    @apply rounded-md bg-gray-900 h-full flex flex-col p-1
+    border border-gray-800 relative before:absolute before:content-none before:w-full before:h-full before:bg-white before:z-[1000];
   }
-  .wrapper {
-    @apply mx-auto p-5 sm:max-w-[70rem];
+  .h1-bold {
+    @apply text-white font-medium text-[20px] max-sm:text-[18px];
   }
 
   .hfPadding {
@@ -25,21 +26,7 @@ body {
   .transitionAll {
     @apply transition-all duration-300 ease-in-out;
   }
-
-  /* Search Container Styling*/
-  .search-container-enter {
-    @apply opacity-0;
-  }
-
-  .search-container-enter-active {
-    @apply opacity-100 transition-opacity duration-300;
-  }
-
-  .search-container-exit {
-    @apply opacity-100;
-  }
-
-  .search-container-exit-active {
-    @apply opacity-0 transition-opacity duration-300;
+  .wrapper {
+    @apply mx-auto p-5 sm:max-w-[70rem];
   }
 }
