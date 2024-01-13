@@ -41,7 +41,7 @@ export default function CurrentLocation() {
       >
         {loadingLoc ? (
           <div className="space-x-2 justify-centered">
-            <Icons.spinner className="h-6 w-6 text-[#F59E0B] animate-spin" />
+            <Icons.spinner className="h-3 w-3 text-[#F59E0B] animate-spin" />
             <p> Locating you...</p>
           </div>
         ) : (
