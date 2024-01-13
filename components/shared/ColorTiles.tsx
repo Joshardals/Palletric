@@ -1,3 +1,7 @@
 export default function ColorTiles() {
-  return <div>ColorTiles</div>;
+  return (
+    <div className=" bg-gray-900/70">
+      <div>1</div>
+    </div>
+  );
 }

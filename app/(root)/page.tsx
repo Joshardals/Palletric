@@ -1,5 +1,6 @@
 "use client";
 import ColorTiles from "@/components/shared/ColorTiles";
+import Palettes from "@/components/shared/Palettes";
 import SearchContainer from "@/components/shared/SearchItem";
 import { useLocationLoading, useSearchStore } from "@/lib/store/store";
 import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
@@ -35,8 +36,9 @@ export default function Home() {
 
   return (
     <main className="hfPadding">
-      <div className="px-5">
-        <ColorTiles />
+      <div className="sm:px-20 flex flex-col space-y-6 items-center justify-center">
+        <h1 className="h1-bold">Palettes</h1>
+        <Palettes />
         <SearchContainer />
       </div>
     </main>
