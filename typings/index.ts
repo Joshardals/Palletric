@@ -13,3 +13,8 @@ export interface LocationLoadingState {
   loadingLoc: boolean;
   updateLoading: (loading: LocationLoadingState["loadingLoc"]) => void;
 }
+
+export interface searchPlaceState {
+  place: string;
+  setPlace: (place: searchPlaceState["place"]) => void;
+}

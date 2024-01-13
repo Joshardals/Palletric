@@ -1,5 +1,9 @@
 "use client";
-import { useLocationLoading, useSearchStore } from "@/lib/store/store";
+import {
+  useLocationLoading,
+  useSearchPlace,
+  useSearchStore,
+} from "@/lib/store/store";
 import {
   ChangeEvent,
   KeyboardEvent,
@@ -17,7 +21,7 @@ import CurrentLocation from "./CurrentLocation";
 
 export default function SearchContainer() {
   const { search, setSearch, updateSearch } = useSearchStore();
-  const [userInput, setUserInput] = useState("");
+  const { place, setPlace } = useSearchPlace();
   const [results, setResults] = useState<LocationResult[]>([]);
   const [loading, setLoading] = useState(false);
   const { loadingLoc } = useLocationLoading();
@@ -123,7 +127,7 @@ export default function SearchContainer() {
 
   const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    setUserInput(inputValue);
+    setPlace(inputValue);
 
     // Reset focused Index when the input changes
     setFocusedIndex(null);
@@ -145,7 +149,7 @@ export default function SearchContainer() {
   };
 
   const handleResultClick = (result: LocationResult) => {
-    setUserInput(result.display_name);
+    setPlace(result.display_name);
     setResults([]);
     setFocusedIndex(null);
   };
@@ -169,10 +173,6 @@ export default function SearchContainer() {
       }
     };
 
-    const savedUserInput = localStorage.getItem("userInput");
-    if (savedUserInput) {
-      setUserInput(savedUserInput);
-    }
     // Trying to prevent the underlying content from scrolling when search is active.
     document.body.classList.toggle("fixed", search);
 
@@ -192,9 +192,8 @@ export default function SearchContainer() {
   }, [search, loadingLoc]);
 
   useEffect(() => {
-    localStorage.setItem("userInput", userInput);
     setFocusedIndex(null);
-  }, [userInput]);
+  }, [place]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown as any);
@@ -237,19 +236,19 @@ export default function SearchContainer() {
               type="text"
               placeholder="Search for a place"
               className={`flex-1 outline-none bg-transparent `}
-              value={userInput}
+              value={place}
               onChange={handleInputChange}
               onBlur={handleBlur}
               autoCorrect="off"
               autoFocus
             />
-
+            {/* 
             <div
               className="bg-gray-700/80 transitionAll cursor-pointer p-1 rounded-md"
               onClick={() => setUserInput("")}
             >
               <Icons.xMark />
-            </div>
+            </div> */}
 
             <div
               className=" bg-gray-700/80 transitionAll cursor-pointer py-1 px-4 rounded-md"
@@ -281,7 +280,7 @@ export default function SearchContainer() {
                       dangerouslySetInnerHTML={{
                         __html: highlightMatchedText(
                           result.display_name,
-                          userInput
+                          place
                         ),
                       }}
                     />
