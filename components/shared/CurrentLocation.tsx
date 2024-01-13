@@ -41,12 +41,12 @@ export default function CurrentLocation() {
       >
         {loadingLoc ? (
           <div className="space-x-2 justify-centered">
-            <Icons.spinner className=" text-[#F59E0B] animate-spin h-4 w-4 sm:h-5 sm:w-5" />
+            <Icons.spinner className=" text-[#F59E0B] animate-spin h-5 w-5" />
             <p> Locating you...</p>
           </div>
         ) : (
           <div className="space-x-2 justify-centered">
-            <Icons.location className="h-4 w-4 sm:h-5 sm:w-5" />
+            <Icons.location className="h-5 w-5" />
             <p> Current Location</p>
           </div>
         )}
