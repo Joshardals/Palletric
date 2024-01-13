@@ -1,10 +1,11 @@
 "use client";
+import ColorTiles from "@/components/shared/ColorTiles";
 import SearchContainer from "@/components/shared/SearchItem";
 import { useLocationLoading, useSearchStore } from "@/lib/store/store";
 import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
 
 export default function Home() {
-  const { search, setSearch, updateSearch } = useSearchStore();
+  const { updateSearch } = useSearchStore();
   const { loadingLoc } = useLocationLoading();
 
   // Event Listeners for ctrl + k and esc button -- START.
@@ -33,10 +34,9 @@ export default function Home() {
   // Event Listeners for ctrl + k and esc button -- END.
 
   return (
-    <main className="hfPadding h-screen">
+    <main className="hfPadding">
       <div className="px-5">
-        <p>Palletric&apos;s algorithm coming soon!</p>
-
+        <ColorTiles />
         <SearchContainer />
       </div>
     </main>

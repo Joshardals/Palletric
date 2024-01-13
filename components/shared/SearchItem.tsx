@@ -207,7 +207,9 @@ export default function SearchContainer() {
     <div
       className={`max-sm:absolute fixed top-0 left-0 bottom-0 h-full w-full bg-gray-900/70 z-10 overflow-hidden select-none
     backdrop-blur-sm sm:justify-centered opacity-0 pointer-events-none p-5 sm:px-20 transition-opacity duration-300 ease-out
-    ${search && "opacity-100 pointer-events-auto"} 
+    ${search && "opacity-100 pointer-events-auto"} ${
+        loadingLoc && "cursor-not-allowed"
+      }
     `}
       onClick={() => {
         if (search && !loadingLoc) {
