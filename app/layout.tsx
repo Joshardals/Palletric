@@ -12,7 +12,7 @@ const roboto = Roboto({
 const open_sans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
-  weight: ["600"],
+  weight: ["600", "800"],
   variable: "--font-open_sans",
 });
 

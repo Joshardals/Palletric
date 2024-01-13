@@ -5,7 +5,7 @@ export default function Palettes() {
     <section className="w-full space-y-6">
       {/* Options inlcudes: Color Palettes, Inspired Palettes, Explore Hues, Location-Inspired Palettes */}
       <div className="space-y-2">
-        <h1 className="h1-bold text-center font-extrabold">Explore Your Palette</h1>
+        <h1 className="h1-bold text-center font-bold">Explore Your Palette</h1>
         <p className="capitalize text-center">Your location, your palette</p>
       </div>
       <div className=" grid grid-cols-3 gap-8 max-md:grid-cols-2 content-center">
