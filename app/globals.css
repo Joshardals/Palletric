@@ -11,7 +11,7 @@ body {
 @layer utilities {
   .animateTiles {
     @apply relative before:transition-all before:duration-300 before:ease-in-out 
-    before:absolute before:h-full before:w-full before:bg-gradient-to-tr before:from-transparent before:via-white/[2%] before:to-transparent 
+    before:absolute before:h-full before:w-full before:bg-gradient-to-r before:from-transparent before:via-white/[10%] before:to-transparent 
      overflow-hidden before:-translate-x-full
     hover:before:translate-x-full
     /* before:top-full before:left-0 hover:before:-top-[100%] */
