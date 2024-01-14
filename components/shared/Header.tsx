@@ -4,7 +4,7 @@ import Search from "./Search";
 
 export default function Header() {
   return (
-    <div className="fixed top-0 left-0 right-0 backdrop-blur-lg select-none hfPadding">
+    <div className="fixed top-0 left-0 right-0 backdrop-blur-lg select-none hfPadding z-[1000]">
       <div
         className="flex items-center justify-between bg-gray-900
        backdrop-blur-lg rounded-2xl p-5 border border-gray-800"
