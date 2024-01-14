@@ -5,6 +5,8 @@ const colors = [
   { color: "bg-blue-500" },
   { color: "bg-yellow-500" },
   { color: "bg-black" },
+  { color: "bg-purple-500" },
+  { color: "bg-yellow-800" },
 ];
 
 export default function Palettes() {
