@@ -17,7 +17,7 @@ export default function Header() {
             height={30}
             className=" max-sm:h-6 max-sm:w-6"
           />
-          <h1 className="h1-bold font-mono font-medium">Palletric</h1>
+          <h1 className="h1-bold font-sans ">palletric</h1>
         </Link>
         <Search />
       </div>
