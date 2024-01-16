@@ -2,7 +2,7 @@ import { SliderProps } from "@/typings";
 
 export default function Slider({ label, value, onChange }: SliderProps) {
   return (
-    <div className="flex items-center space-x-4">
+    <div className="grid grid-cols-3 gap-4">
       <label htmlFor={`${label.toLowerCase()}Slider`}>{label}:</label>
       <input
         type="range"
@@ -10,6 +10,7 @@ export default function Slider({ label, value, onChange }: SliderProps) {
         value={value}
         min="0"
         max="200"
+        className="col-span-2"
         onChange={(e) => onChange(parseInt(e.target.value, 10))}
       />
     </div>

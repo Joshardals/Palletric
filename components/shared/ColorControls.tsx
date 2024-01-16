@@ -10,7 +10,7 @@ export default function ColorControls() {
   return (
     <div className="space-y-10">
       <h1 className="h1-bold text-center font-bold">Color Adjustment</h1>
-      <div className="grid grid-cols-3 gap-4 max-md:grid-cols-1 *:justify-center">
+      <div className="grid grid-cols-3 gap-4 max-md:grid-cols-1 sm:*:justify-center">
         <Slider
           label="Brightness"
           value={brightness}
