@@ -20,7 +20,7 @@ body {
   }
 
   .hfPadding {
-    @apply p-5 sm:px-20 sm:py-10;
+    @apply p-5 sm:px-20 sm:pt-10;
   }
   .justify-centered {
     @apply flex justify-center items-center;

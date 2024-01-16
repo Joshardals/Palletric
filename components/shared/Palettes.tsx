@@ -4,12 +4,12 @@ import ColorControls from "./ColorControls";
 import ColorTiles from "./ColorTiles";
 
 const colors = [
-  { color: "bg-red-500" },
-  { color: "bg-blue-500" },
-  { color: "bg-yellow-500" },
-  { color: "bg-black" },
-  { color: "bg-purple-500" },
-  { color: "bg-yellow-800" },
+  { color: "#9A4DFF" },
+  { color: "#F27300" },
+  { color: "#5AC8FA" },
+  { color: "#FFD700" },
+  { color: "#4CAF50" },
+  { color: "#FF4081" },
 ];
 
 export default function Palettes() {
