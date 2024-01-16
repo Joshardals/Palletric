@@ -10,16 +10,10 @@ body {
 
 @layer utilities {
   .animateTiles {
-    @apply before:transition-all before:duration-300 before:ease-in-out 
-    before:absolute before:h-full before:w-full before:bg-gradient-to-r before:from-transparent before:via-white/[10%] before:to-transparent 
-     overflow-hidden before:-translate-x-full
-    hover:before:translate-x-full
-    /* before:top-full before:left-0 hover:before:-top-[100%] */
-    /* before:absolute before:bg-[#ADD8E6]/40 before:w-4 before:h-full before:transition-all before:duration-300 before:ease-in-out before:-rotate-[30deg] before:bottom-0
-    after:absolute after:bg-[#ADD8E6]/10 after:w-4 after:h-full after:bottom-0 after:right-0 after:transition-all after:duration-300 after:ease-in-out 
-    
-    hover:before:translate-x-full
-    hover:after:-translate-x-[2000%]; */;
+    @apply overflow-hidden before:transition-all before:duration-500 before:ease-in-out 
+    before:absolute before:h-full before:w-full before:bg-gradient-to-r before:from-transparent before:via-white/[30%] before:to-transparent 
+    before:-translate-x-full
+    hover:before:translate-x-full;
   }
   .h1-bold {
     @apply text-white text-[20px] max-sm:text-[18px];
