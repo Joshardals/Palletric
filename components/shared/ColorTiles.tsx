@@ -1,5 +1,6 @@
 "use client";
 import { ColorTilesProps } from "@/typings";
+import { Draggable } from "react-beautiful-dnd";
 import tinycolor from "tinycolor2";
 
 export default function ColorTiles({
@@ -7,6 +8,7 @@ export default function ColorTiles({
   brightness,
   saturation,
   hue,
+  index,
 }: ColorTilesProps) {
   const style = {
     background: `${color}`,
@@ -36,18 +38,27 @@ export default function ColorTiles({
   const computedColor = computeRGBColor();
 
   return (
-    <div className={`rounded-md max-sm:h-[5rem] h-[10rem] cursor-pointer`}>
-      <div
-        className="rounded-md bg-gray-900 h-full flex flex-col p-1 border border-gray-800
-      "
-      >
+    <Draggable draggableId="palette" index={index}>
+      {(provided) => (
         <div
-          className={` rounded-md flex-1 animateTiles relative`}
-          style={style}
-        />
-        <div className="text-center p-1">#{computedColor}</div>
-      </div>
-      {/* Where I will display the color codes on mobile devices */}
-    </div>
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+          className={`rounded-md max-sm:h-[5rem] h-[10rem] cursor-pointer`}
+        >
+          <div
+            className="rounded-md bg-gray-900 h-full flex flex-col p-1 border border-gray-800
+     "
+          >
+            <div
+              className={` rounded-md flex-1 animateTiles relative`}
+              style={style}
+            />
+            <div className="text-center p-1">#{computedColor}</div>
+          </div>
+          {/* Where I will display the color codes on mobile devices */}
+        </div>
+      )}
+    </Draggable>
   );
 }

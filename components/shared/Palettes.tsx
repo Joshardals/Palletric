@@ -4,6 +4,7 @@ import ColorControls from "./ColorControls";
 import ColorTiles from "./ColorTiles";
 import { useState } from "react";
 import Draggable from "react-draggable";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 const colors = [
   { id: 1, color: "#9A4DFF" },
@@ -32,6 +33,7 @@ export default function Palettes() {
     setPalette(colors);
   };
 
+  const onDragEnd = () => {};
   return (
     <section className="w-full space-y-10">
       {/* Options inlcudes: Color Palettes, Inspired Palettes, Explore Hues, Location-Inspired Palettes */}
@@ -43,24 +45,30 @@ export default function Palettes() {
         */}
         <p className="capitalize text-center">Your location, your palette</p>
       </div>
-      <div className=" grid grid-cols-6 gap-8 max-md:grid-cols-2 content-center">
-        {palette.map((color, index) => (
-          <Draggable
-            key={color.id}
-            onStop={(e, data) => moveTile(index, Math.round(data.y / 80))}
-          >
-            <div>
-              <ColorTiles
-                key={color.color}
-                color={color.color}
-                brightness={brightness}
-                saturation={saturation}
-                hue={hue}
-              />
+
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="palette">
+          {(provided) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className=" grid grid-cols-6 gap-8 max-md:grid-cols-2 content-center"
+            >
+              {palette.map((color, index) => (
+                <ColorTiles
+                  key={color.id}
+                  color={color.color}
+                  brightness={brightness}
+                  saturation={saturation}
+                  hue={hue}
+                  index={index}
+                />
+              ))}
+              {provided.placeholder}
             </div>
-          </Draggable>
-        ))}
-      </div>
+          )}
+        </Droppable>
+      </DragDropContext>
 
       <button onClick={refreshPalette}>Refresh Palette</button>
 

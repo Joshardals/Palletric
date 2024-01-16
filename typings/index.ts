@@ -9,6 +9,7 @@ export interface ColorTilesProps {
   brightness: number;
   saturation: number;
   hue: number;
+  index: number; 
 }
 
 export interface HueState {
