@@ -10,7 +10,7 @@ export default function Slider({ label, value, onChange }: SliderProps) {
         value={value}
         min="0"
         max="200"
-        className="col-span-2"
+        className="col-span-2 outline-none"
         onChange={(e) => onChange(parseInt(e.target.value, 10))}
       />
     </div>

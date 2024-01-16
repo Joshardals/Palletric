@@ -16,6 +16,7 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18",
+    "react-draggable": "^4.4.6",
     "tailwindcss-animate": "^1.0.7",
     "tinycolor2": "^1.6.0",
     "zustand": "^4.4.7"

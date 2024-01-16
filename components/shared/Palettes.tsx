@@ -3,6 +3,7 @@ import { useBrightness, useHue, useSaturation } from "@/lib/store/store";
 import ColorControls from "./ColorControls";
 import ColorTiles from "./ColorTiles";
 import { useState } from "react";
+import Draggable from "react-draggable";
 
 const colors = [
   { id: 1, color: "#9A4DFF" },
@@ -19,6 +20,18 @@ export default function Palettes() {
   const { hue } = useHue();
   const [palette, setPalette] = useState(colors);
 
+  const moveTile = (fromIndex: any, toIndex: any) => {
+    const updatedPalette = [...palette];
+    const [movedTile] = updatedPalette.splice(fromIndex, 1);
+    updatedPalette.splice(toIndex, 0, movedTile);
+
+    setPalette(updatedPalette);
+  };
+
+  const refreshPalette = () => {
+    setPalette(colors);
+  };
+
   return (
     <section className="w-full space-y-10">
       {/* Options inlcudes: Color Palettes, Inspired Palettes, Explore Hues, Location-Inspired Palettes */}
@@ -31,16 +44,25 @@ export default function Palettes() {
         <p className="capitalize text-center">Your location, your palette</p>
       </div>
       <div className=" grid grid-cols-6 gap-8 max-md:grid-cols-2 content-center">
-        {colors.map((color) => (
-          <ColorTiles
-            key={color.color}
-            color={color.color}
-            brightness={brightness}
-            saturation={saturation}
-            hue={hue}
-          />
+        {palette.map((color, index) => (
+          <Draggable
+            key={color.id}
+            onStop={(e, data) => moveTile(index, Math.round(data.y / 80))}
+          >
+            <div>
+              <ColorTiles
+                key={color.color}
+                color={color.color}
+                brightness={brightness}
+                saturation={saturation}
+                hue={hue}
+              />
+            </div>
+          </Draggable>
         ))}
       </div>
+
+      <button onClick={refreshPalette}>Refresh Palette</button>
 
       <ColorControls />
     </section>
