@@ -3,6 +3,14 @@ export interface BrightnessState {
   updateBrightness: (brightness: BrightnessState["brightness"]) => void;
 }
 
+// ColorTiles Props
+export interface ColorTilesProps {
+  color: string;
+  brightness: number;
+  saturation: number;
+  hue: number;
+}
+
 export interface HueState {
   hue: number;
   updateHue: (hue: HueState["hue"]) => void;

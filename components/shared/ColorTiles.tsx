@@ -1,4 +1,5 @@
 "use client";
+import { ColorTilesProps } from "@/typings";
 import tinycolor from "tinycolor2";
 
 export default function ColorTiles({
@@ -6,12 +7,7 @@ export default function ColorTiles({
   brightness,
   saturation,
   hue,
-}: {
-  color: string;
-  brightness: number;
-  saturation: number;
-  hue: number;
-}) {
+}: ColorTilesProps) {
   const style = {
     background: `${color}`,
     filter: `brightness(${brightness}%) saturate(${saturation}%) hue-rotate(${hue}deg)`,
