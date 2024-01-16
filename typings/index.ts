@@ -5,11 +5,12 @@ export interface BrightnessState {
 
 // ColorTiles Props
 export interface ColorTilesProps {
+  id: number;
   color: string;
   brightness: number;
   saturation: number;
   hue: number;
-  index: number; 
+  index: number;
 }
 
 export interface HueState {

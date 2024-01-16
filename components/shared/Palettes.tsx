@@ -3,8 +3,6 @@ import { useBrightness, useHue, useSaturation } from "@/lib/store/store";
 import ColorControls from "./ColorControls";
 import ColorTiles from "./ColorTiles";
 import { useState } from "react";
-import Draggable from "react-draggable";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 const colors = [
   { id: 1, color: "#9A4DFF" },
@@ -21,19 +19,6 @@ export default function Palettes() {
   const { hue } = useHue();
   const [palette, setPalette] = useState(colors);
 
-  const moveTile = (fromIndex: any, toIndex: any) => {
-    const updatedPalette = [...palette];
-    const [movedTile] = updatedPalette.splice(fromIndex, 1);
-    updatedPalette.splice(toIndex, 0, movedTile);
-
-    setPalette(updatedPalette);
-  };
-
-  const refreshPalette = () => {
-    setPalette(colors);
-  };
-
-  const onDragEnd = () => {};
   return (
     <section className="w-full space-y-10">
       {/* Options inlcudes: Color Palettes, Inspired Palettes, Explore Hues, Location-Inspired Palettes */}
@@ -46,31 +31,19 @@ export default function Palettes() {
         <p className="capitalize text-center">Your location, your palette</p>
       </div>
 
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="palette">
-          {(provided) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              className=" grid grid-cols-6 gap-8 max-md:grid-cols-2 content-center"
-            >
-              {palette.map((color, index) => (
-                <ColorTiles
-                  key={color.id}
-                  color={color.color}
-                  brightness={brightness}
-                  saturation={saturation}
-                  hue={hue}
-                  index={index}
-                />
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-
-      <button onClick={refreshPalette}>Refresh Palette</button>
+      <div className=" grid grid-cols-6 gap-8 max-md:grid-cols-2 content-center">
+        {palette.map((color, index) => (
+          <ColorTiles
+            key={color.id}
+            id={color.id}
+            color={color.color}
+            brightness={brightness}
+            saturation={saturation}
+            hue={hue}
+            index={index}
+          />
+        ))}
+      </div>
 
       <ColorControls />
     </section>
