@@ -1,13 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icons } from "../ui/icons";
-import { useLocationLoading, useSearchStore } from "@/lib/store/store";
+import {
+  useLocationLoading,
+  usePaletteStore,
+  useSearchStore,
+} from "@/lib/store/store";
 import { createColorPalette } from "@/lib/utils";
 
 export default function CurrentLocation() {
   const { loadingLoc, updateLoading } = useLocationLoading();
   const { updateSearch } = useSearchStore();
-  const [palette, setPalette] = useState();
+  const { updatePalette } = usePaletteStore();
 
   const handleCurrentLocationClick = () => {
     updateLoading(true);
@@ -21,7 +25,7 @@ export default function CurrentLocation() {
             );
 
             const res = createColorPalette(latitude, longitude);
-            console.log(res);
+            updatePalette(res);
           },
           () => {
             console.log("Unable to retrieve your location.");

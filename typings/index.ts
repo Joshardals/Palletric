@@ -28,6 +28,11 @@ export interface LocationLoadingState {
   updateLoading: (loading: LocationLoadingState["loadingLoc"]) => void;
 }
 
+export interface PaletteState {
+  palette: string[];
+  updatePalette: (palette: PaletteState["palette"]) => void;
+}
+
 export interface SaturationState {
   saturation: number;
   updateSaturation: (saturation: SaturationState["saturation"]) => void;

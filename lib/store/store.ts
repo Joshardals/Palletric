@@ -2,6 +2,7 @@ import {
   BrightnessState,
   HueState,
   LocationLoadingState,
+  PaletteState,
   SaturationState,
   searchPlaceState,
   searchState,
@@ -40,4 +41,10 @@ export const useSaturation = create<SaturationState>((set) => ({
 export const useHue = create<HueState>((set) => ({
   hue: 0,
   updateHue: (hue) => set(() => ({ hue: hue })),
+}));
+
+// Palette Store Here
+export const usePaletteStore = create<PaletteState>((set) => ({
+  palette: [],
+  updatePalette: (palette) => set(() => ({ palette: palette })),
 }));

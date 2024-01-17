@@ -1,5 +1,10 @@
 "use client";
-import { useBrightness, useHue, useSaturation } from "@/lib/store/store";
+import {
+  useBrightness,
+  useHue,
+  usePaletteStore,
+  useSaturation,
+} from "@/lib/store/store";
 import ColorControls from "./ColorControls";
 import ColorTiles from "./ColorTiles";
 import { useState } from "react";
@@ -17,7 +22,8 @@ export default function Palettes() {
   const { brightness } = useBrightness();
   const { saturation } = useSaturation();
   const { hue } = useHue();
-  const [palette, setPalette] = useState(colors);
+  const { palette, updatePalette } = usePaletteStore();
+  // const [palette, setPalette] = useState(colors);
 
   return (
     <section className="w-full space-y-10">
@@ -34,9 +40,9 @@ export default function Palettes() {
       <div className=" grid grid-cols-6 gap-8 max-md:grid-cols-2 content-center">
         {palette.map((color, index) => (
           <ColorTiles
-            key={color.id}
-            id={color.id}
-            color={color.color}
+            key={index}
+            id={index}
+            color={color}
             brightness={brightness}
             saturation={saturation}
             hue={hue}
