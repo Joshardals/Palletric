@@ -1,63 +1,83 @@
-// Helper function to convert RGB values to hex
-export function getRGBCode(
-  color: string,
-  brightness: number,
-  saturation: number,
-  hue: number
-) {
-  // Assuming color is in the format 'bg-red-500'
-  const rgbValues = color.match(/\d+/g);
+// Algorithm to Create Color Palette based on the user's current location.
 
-  if (rgbValues && rgbValues.length >= 3) {
-    const [redStr, greenStr, blueStr] = rgbValues;
-    const red = parseInt(redStr, 10);
-    const green = parseInt(greenStr, 10);
-    const blue = parseInt(blueStr, 10);
+export function createColorPalette(latitude: string, longitude: string) {
+  // Get the current date and time
+  const date = new Date();
 
-    const adjustedBrightness = brightness / 100;
-    const adjustedSaturation = saturation / 100;
+  // Get the current hour
+  const hour = date.getHours();
 
-    // Apply brightness and saturation adjustments
-    const adjustedRed = Math.round(
-      red * adjustedBrightness + (1 - adjustedBrightness) * 255
-    );
-    const adjustedGreen = Math.round(
-      green * adjustedBrightness + (1 - adjustedBrightness) * 255
-    );
-    const adjustedBlue = Math.round(
-      blue * adjustedBrightness + (1 - adjustedBrightness) * 255
-    );
+  // Define an array for different times of the day
+  const colors = [
+    // Midnight
+    ["#000000", "#0f0f0f", "#1f1f1f", "#2f2f2f", "#3f3f3f"],
+    // Dawn
+    ["#3f3f3f", "#4f4f4f", "#5f5f5f", "#6f6f6f", "#7f7f7f"],
+    // Morning
+    ["#7f7f7f", "#8f8f8f", "#9f9f9f", "#afafaf", "#bfbfbf"],
+    // Noon
+    ["#bfbfbf", "#cfcfcf", "#dfdfdf", "#efefef", "#ffffff"],
+    // Afternoon
+    ["#ffffff", "#efefef", "#dfdfdf", "#cfcfcf", "#bfbfbf"],
+    // Dusk
+    ["#bfbfbf", "#afafaf", "#9f9f9f", "#8f8f8f", "#7f7f7f"],
+    // Evening
+    ["#7f7f7f", "#6f6f6f", "#5f5f5f", "#4f4f4f", "#3f3f3f"],
+    // Night
+    ["#3f3f3f", "#2f2f2f", "#1f1f1f", "#0f0f0f", "#000000"],
+  ];
 
-    // Apply saturation adjustment
-    const desaturatedRed =
-      adjustedRed * (1 - adjustedSaturation) + 255 * adjustedSaturation;
-    const desaturatedGreen =
-      adjustedGreen * (1 - adjustedSaturation) + 255 * adjustedSaturation;
-    const desaturatedBlue =
-      adjustedBlue * (1 - adjustedSaturation) + 255 * adjustedSaturation;
+  // Define a variable to store the index of the color array
+  let index;
 
-    // Apply hue adjustment
-    const hueRadians = (hue / 360) * Math.PI * 2;
-    const rotatedRed =
-      Math.cos(hueRadians) * desaturatedRed -
-      Math.sin(hueRadians) * desaturatedGreen;
-    const rotatedGreen =
-      Math.sin(hueRadians) * desaturatedRed +
-      Math.cos(hueRadians) * desaturatedGreen;
-    const rotatedBlue = desaturatedBlue;
+  // Use a switch statement to assign the index based on the hour
+  switch (hour) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      // Midnight
+      index = 0;
+      break;
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+      // Dawn
+      index = 1;
+      break;
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+      // Morning
+      index = 2;
+      break;
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+      // Noon
+      index = 3;
+      break;
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+      // Afternoon
+      index = 4;
+      break;
 
-    // Ensure values are within valid RGB range
-    const finalRed = Math.min(255, Math.max(0, rotatedRed));
-    const finalGreen = Math.min(255, Math.max(0, rotatedGreen));
-    const finalBlue = Math.min(255, Math.max(0, rotatedBlue));
+    case 20:
+    case 21:
+    case 22:
+    case 23:
+      // Dusk
+      index = 5;
+      break;
 
-    // Convert RGB to hex
-    const hexCode = `#${Math.round(finalRed).toString(16)}${Math.round(
-      finalGreen
-    ).toString(16)}${Math.round(finalBlue).toString(16)}`;
-
-    return hexCode.toUpperCase();
+    default:
+      // Evening
+      index = 6;
   }
-
-  return "";
 }

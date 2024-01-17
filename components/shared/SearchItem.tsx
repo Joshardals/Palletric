@@ -12,11 +12,9 @@ import {
   useRef,
   useState,
 } from "react";
-import debounce from "lodash.debounce";
 import { fetchAutoCompleteFunction } from "@/lib/hooks";
 import { LocationResult } from "@/typings";
 import { Icons } from "../ui/icons";
-import Image from "next/image";
 import CurrentLocation from "./CurrentLocation";
 
 export default function SearchContainer() {
