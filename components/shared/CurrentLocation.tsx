@@ -19,7 +19,7 @@ export default function CurrentLocation() {
               `Your current location is: Latitude ${latitude}, Longitude: ${longitude}`
             );
 
-            // createColorPalette(latitude, longitude);
+            createColorPalette(latitude, longitude);
           },
           () => {
             console.log("Unable to retrieve your location.");
