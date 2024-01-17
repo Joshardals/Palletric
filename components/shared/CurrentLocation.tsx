@@ -7,6 +7,7 @@ import { createColorPalette } from "@/lib/utils";
 export default function CurrentLocation() {
   const { loadingLoc, updateLoading } = useLocationLoading();
   const { updateSearch } = useSearchStore();
+  const [palette, setPalette] = useState();
 
   const handleCurrentLocationClick = () => {
     updateLoading(true);
@@ -19,7 +20,8 @@ export default function CurrentLocation() {
               `Your current location is: Latitude ${latitude}, Longitude: ${longitude}`
             );
 
-            createColorPalette(latitude, longitude); 
+            const res = createColorPalette(latitude, longitude);
+            console.log(res);
           },
           () => {
             console.log("Unable to retrieve your location.");

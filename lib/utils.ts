@@ -24,8 +24,8 @@ export function createColorPalette(latitude: number, longitude: number) {
   const solarAngleDegrees = (solarAngle * 180) / Math.PI;
 
   // Let me log the solar time and the solar angle.
-  console.log(`The solar time is: ${solarTime}`);
-  console.log(`The solar angle is: ${solarAngleDegrees} degrees`);
+  // console.log(`The solar time is: ${solarTime}`);
+  // console.log(`The solar angle is: ${solarAngleDegrees} degrees`);
 
   // Define an array for different times of the day
   const colors = [
@@ -119,6 +119,5 @@ export function createColorPalette(latitude: number, longitude: number) {
   // Use the chroma.js library to generate six colors from the color scale
   const colorPalette = colorScale.colors(6);
 
-  // Log the color palette
-  console.log(colorPalette);
+  return colorPalette;
 }
