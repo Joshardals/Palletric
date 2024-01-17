@@ -11,11 +11,11 @@ export function createColorPalette(latitude: number, longitude: number) {
   const hour = date.getHours();
 
   // Use the SunCalc library to get the solar time of the user's location
-  const solarTime = SunCalc.getTimes(date, latitude, longitude);
+  const solarTime = SunCalc.getTimes(date, latitude, longitude).solarNoon;
 
   // Use the SunCalc library to get the solar angle of the user's location
   const solarAngle = SunCalc.getPosition(
-    solarTime.sunrise,
+    solarTime,
     latitude,
     longitude
   ).altitude;
@@ -103,7 +103,15 @@ export function createColorPalette(latitude: number, longitude: number) {
   }
 
   // Get the color array based on the index
-  const colorArray = colors[index];
+  let colorArray: any = colors[index];
+
+  // Use the chroma.js library to modify the color array based on the solar time and the solar angle
+  colorArray = colorArray.map((color: any) => {
+    return chroma(color)
+      .saturate(solarTime.getHours() / 12)
+      .brighten(-latitude / 90)
+      .hex();
+  });
 
   // Use the chroma.js library to create a color scale from the color array
   const colorScale = chroma.scale(colorArray);
