@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Icons } from "../ui/icons";
 import { useLocationLoading, useSearchStore } from "@/lib/store/store";
+import { createColorPalette } from "@/lib/utils";
 
 export default function CurrentLocation() {
   const { loadingLoc, updateLoading } = useLocationLoading();
@@ -17,6 +18,8 @@ export default function CurrentLocation() {
             console.log(
               `Your current location is: Latitude ${latitude}, Longitude: ${longitude}`
             );
+
+            createColorPalette(6.5244, 3.3792);
           },
           () => {
             console.log("Unable to retrieve your location.");

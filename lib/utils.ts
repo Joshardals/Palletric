@@ -1,14 +1,31 @@
 import chroma from "chroma-js";
-
+import SunCalc from "suncalc";
 
 // Algorithm to Create Color Palette based on the user's current location.
 
-export function createColorPalette(latitude: string, longitude: string) {
+export function createColorPalette(latitude: number, longitude: number) {
   // Get the current date and time
   const date = new Date();
 
   // Get the current hour
   const hour = date.getHours();
+
+  // Use the SunCalc library to get the solar time of the user's location
+  const solarTime = SunCalc.getTimes(date, latitude, longitude);
+
+  // Use the SunCalc library to get the solar angle of the user's location
+  const solarAngle = SunCalc.getPosition(
+    solarTime.sunrise,
+    latitude,
+    longitude
+  ).altitude;
+
+  // Convert the solar angle from radians to degrees
+  const solarAngleDegrees = (solarAngle * 180) / Math.PI;
+
+  // Let me log the solar time and the solar angle.
+  console.log(`The solar time is: ${solarTime}`);
+  console.log(`The solar angle is: ${solarAngleDegrees} degrees`);
 
   // Define an array for different times of the day
   const colors = [
