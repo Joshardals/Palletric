@@ -1,3 +1,6 @@
+import chroma from "chroma-js";
+
+
 // Algorithm to Create Color Palette based on the user's current location.
 
 export function createColorPalette(latitude: string, longitude: string) {
@@ -28,7 +31,7 @@ export function createColorPalette(latitude: string, longitude: string) {
   ];
 
   // Define a variable to store the index of the color array
-  let index;
+  let index: any;
 
   // Use a switch statement to assign the index based on the hour
   switch (hour) {
@@ -42,10 +45,10 @@ export function createColorPalette(latitude: string, longitude: string) {
     case 4:
     case 5:
     case 6:
-    case 7:
       // Dawn
       index = 1;
       break;
+    case 7:
     case 8:
     case 9:
     case 10:
@@ -54,30 +57,43 @@ export function createColorPalette(latitude: string, longitude: string) {
       index = 2;
       break;
     case 12:
-    case 13:
-    case 14:
-    case 15:
       // Noon
       index = 3;
       break;
+    case 13:
+    case 14:
+    case 15:
     case 16:
     case 17:
-    case 18:
-    case 19:
       // Afternoon
       index = 4;
       break;
-
-    case 20:
-    case 21:
-    case 22:
-    case 23:
+    case 18:
+    case 19:
       // Dusk
       index = 5;
       break;
-
-    default:
+    case 20:
+    case 21:
+    case 22:
       // Evening
       index = 6;
+      break;
+    case 23:
+      // Night
+      index = 7;
+      break;
   }
+
+  // Get the color array based on the index
+  const colorArray = colors[index];
+
+  // Use the chroma.js library to create a color scale from the color array
+  const colorScale = chroma.scale(colorArray);
+
+  // Use the chroma.js library to generate six colors from the color scale
+  const colorPalette = colorScale.colors(6);
+
+  // Log the color palette
+  console.log(colorPalette);
 }
