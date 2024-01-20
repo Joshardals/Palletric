@@ -18,3 +18,28 @@ const debouncedFetchAutoComplete = debounce(async (query: string) => {
 export async function fetchAutoCompleteFunction(query: string) {
   return debouncedFetchAutoComplete(query);
 }
+
+export async function getLocationCoordinates(location: string) {
+  try {
+    const res = await axios.get("https://us1.locationiq.com/v1/search", {
+      params: {
+        q: location,
+        key: API_KEY,
+        format: "json",
+      },
+    });
+
+    const [result] = res.data;
+    if (result) {
+      const { lat, lon } = result;
+      console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+      return { lat, lon };
+    } else {
+      console.log("Location not found");
+      return null;
+    }
+  } catch (error: any) {
+    console.log(`Error fetching location coordinates.`);
+    return null;
+  }
+}

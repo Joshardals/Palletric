@@ -2,12 +2,16 @@
 
 import { useSearchLoading, useSearchPlace } from "@/lib/store/store";
 import { Icons } from "../icons";
+import { useEffect } from "react";
+import { getLocationCoordinates } from "@/lib/hooks";
 
 export default function SearchPlace() {
   const { loadingSearch, updateLoadingSearch } = useSearchLoading();
   const { place } = useSearchPlace();
-  const handleSearch = () => {
-    alert(`Current Location is: ${place}`);
+
+  const handleSearch = async () => {
+    const res = await getLocationCoordinates(place);
+    console.log(res);
   };
   return (
     <div

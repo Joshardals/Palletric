@@ -19,9 +19,6 @@ export default function CurrentLocation() {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
-            console.log(
-              `Your current location is: Latitude ${latitude}, Longitude: ${longitude}`
-            );
 
             const res = createColorPalette(latitude, longitude);
             updatePalette(res);
