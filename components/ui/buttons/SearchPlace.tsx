@@ -28,7 +28,7 @@ export default function SearchPlace() {
       const resPalette = createColorPalette(lat, lon);
       updatePalette(resPalette);
     } catch (error: any) {
-      console.log(`Failed to find location: ${error.message}`);
+    
     }
     updateLoadingSearch(false);
     updateSearch(false);

@@ -15,7 +15,7 @@ export interface ColorTilesProps {
 
 // Error State for the SearchPlace component.
 export interface ErrorSearchPlaceState {
-  error: string;
+  error: boolean;
   updateError: (error: ErrorSearchPlaceState["error"]) => void;
 }
 

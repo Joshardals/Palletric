@@ -61,6 +61,6 @@ export const usePaletteStore = create<PaletteState>((set) => ({
 
 // Error Store Here.
 export const useSearchPlaceError = create<ErrorSearchPlaceState>((set) => ({
-  error: "",
+  error: false,
   updateError: (error) => set(() => ({ error: error })),
 }));
