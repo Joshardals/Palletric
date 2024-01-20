@@ -1,6 +1,7 @@
 "use client";
 import {
   useLocationLoading,
+  useSearchLoading,
   useSearchPlace,
   useSearchStore,
 } from "@/lib/store/store";
@@ -24,6 +25,7 @@ export default function SearchContainer() {
   const [results, setResults] = useState<LocationResult[]>([]);
   const [loading, setLoading] = useState(false);
   const { loadingLoc } = useLocationLoading();
+  const { loadingSearch, updateLoadingSearch } = useSearchLoading();
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const suggestionListRef = useRef<HTMLUListElement>(null);
 
@@ -207,7 +209,7 @@ export default function SearchContainer() {
       className={`max-sm:absolute fixed top-0 left-0 bottom-0 h-full w-full bg-gray-900/70 z-10 overflow-hidden select-none
     backdrop-blur-md sm:justify-centered opacity-0 pointer-events-none p-5 sm:px-20 transition-opacity duration-300 ease-out
     ${search && "opacity-100 pointer-events-auto"} ${
-        loadingLoc && "cursor-not-allowed"
+        (loadingLoc || loadingSearch) && "cursor-not-allowed"
       }
     `}
       onClick={() => {
@@ -243,13 +245,6 @@ export default function SearchContainer() {
               autoCorrect="off"
               autoFocus
             />
-            {/* 
-            <div
-              className="bg-gray-700/80 transitionAll cursor-pointer p-1 rounded-md"
-              onClick={() => setUserInput("")}
-            >
-              <Icons.xMark />
-            </div> */}
 
             <div
               className=" bg-gray-700/80 transitionAll cursor-pointer py-1 px-4 rounded-md"
