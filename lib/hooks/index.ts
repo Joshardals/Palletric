@@ -32,7 +32,6 @@ export async function getLocationCoordinates(location: string) {
     const [result] = res.data;
     if (result) {
       const { lat, lon } = result;
-      console.log(`Latitude: ${lat}, Longitude: ${lon}`);
       return { lat, lon };
     } else {
       console.log("Location not found");
