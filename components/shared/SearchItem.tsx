@@ -219,8 +219,6 @@ export default function SearchContainer() {
       onClick={() => {
         if (search && !loadingLoc) {
           setSearch();
-        } else if (search && !loadingSearch) {
-          setSearch();
         }
       }}
     >
@@ -306,7 +304,7 @@ export default function SearchContainer() {
           </div>
         </div>
 
-        {(loadingLoc || loadingSearch) && (
+        {(loadingLoc && loadingSearch) && (
           <div className="absolute top-0 left-0 cursor-not-allowed bg-transparent  h-full w-full rounded-md" />
         )}
       </div>
