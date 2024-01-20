@@ -65,7 +65,7 @@ export default function SearchPlace() {
       {!place && (
         <div
           className={`absolute top-0 left-0 w-full h-full rounded-md ${
-            !place && "cursor-not-allowed"
+            !place && "cursor-not-allowed bg-black/10"
           }`}
         />
       )}
