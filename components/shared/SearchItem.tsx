@@ -3,6 +3,7 @@ import {
   useLocationLoading,
   useSearchLoading,
   useSearchPlace,
+  useSearchPlaceError,
   useSearchStore,
 } from "@/lib/store/store";
 import {
@@ -26,6 +27,7 @@ export default function SearchContainer() {
   const [loading, setLoading] = useState(false);
   const { loadingLoc } = useLocationLoading();
   const { loadingSearch } = useSearchLoading();
+  const { error } = useSearchPlaceError();
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const suggestionListRef = useRef<HTMLUListElement>(null);
 
@@ -218,7 +220,7 @@ export default function SearchContainer() {
         if (search && !loadingLoc) {
           setSearch();
         } else if (search && !loadingSearch) {
-          setSearch()
+          setSearch();
         }
       }}
     >
@@ -258,6 +260,12 @@ export default function SearchContainer() {
             </div>
           </div>
         </div>
+
+        {error && (
+          <p className="text-xs text-red-500 mx-5">
+            Oops, can't find that place!
+          </p>
+        )}
 
         <div className="flex flex-col space-y-4 pb-5 w-full">
           {results?.length > 0 && (
