@@ -2,12 +2,17 @@
 import ColorTiles from "@/components/shared/ColorTiles";
 import Palettes from "@/components/shared/Palettes";
 import SearchContainer from "@/components/shared/SearchItem";
-import { useLocationLoading, useSearchStore } from "@/lib/store/store";
+import {
+  useLocationLoading,
+  useSearchLoading,
+  useSearchStore,
+} from "@/lib/store/store";
 import { KeyboardEvent, TouchEvent, useEffect, useRef } from "react";
 
 export default function Home() {
   const { updateSearch } = useSearchStore();
   const { loadingLoc } = useLocationLoading();
+  const { loadingSearch } = useSearchLoading();
 
   // Event Listeners for ctrl + k and esc button -- START.
 
@@ -22,6 +27,8 @@ export default function Home() {
 
       if (e.key === "Escape" && !loadingLoc) {
         updateSearch(false);
+      } else if (e.key === "Escape" && !loadingSearch) {
+        updateSearch(false);
       }
     };
 
@@ -30,7 +37,7 @@ export default function Home() {
     return () => {
       document.removeEventListener("keydown", handleKeyDown as any);
     };
-  }, [loadingLoc]);
+  }, [loadingLoc, loadingSearch]);
 
   // Event Listeners for ctrl + k and esc button -- END.
 

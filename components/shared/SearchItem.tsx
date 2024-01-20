@@ -25,7 +25,7 @@ export default function SearchContainer() {
   const [results, setResults] = useState<LocationResult[]>([]);
   const [loading, setLoading] = useState(false);
   const { loadingLoc } = useLocationLoading();
-  const { loadingSearch, updateLoadingSearch } = useSearchLoading();
+  const { loadingSearch } = useSearchLoading();
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const suggestionListRef = useRef<HTMLUListElement>(null);
 
@@ -171,6 +171,8 @@ export default function SearchContainer() {
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.ctrlKey && e.key === "k" && !loadingLoc) {
         updateSearch(false);
+      } else if (e.ctrlKey && e.key === "k" && !loadingSearch) {
+        updateSearch(false);
       }
     };
 
@@ -190,7 +192,7 @@ export default function SearchContainer() {
       document.body.removeEventListener("touchmove", handleTouchMove as any);
       document.removeEventListener("keydown", handleKeyDown as any);
     };
-  }, [search, loadingLoc]);
+  }, [search, loadingLoc, loadingSearch]);
 
   useEffect(() => {
     setFocusedIndex(null);
@@ -215,6 +217,8 @@ export default function SearchContainer() {
       onClick={() => {
         if (search && !loadingLoc) {
           setSearch();
+        } else if (search && !loadingSearch) {
+          setSearch()
         }
       }}
     >
@@ -294,7 +298,7 @@ export default function SearchContainer() {
           </div>
         </div>
 
-        {loadingLoc && (
+        {(loadingLoc || loadingSearch) && (
           <div className="absolute top-0 left-0 cursor-not-allowed bg-transparent  h-full w-full rounded-md" />
         )}
       </div>
