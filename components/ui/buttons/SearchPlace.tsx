@@ -37,7 +37,7 @@ export default function SearchPlace() {
         {loadingSearch ? (
           <div className="space-x-2 justify-centered">
             <Icons.spinner className="animate-spin h-5 w-5" />
-            <p> Locating you...</p>
+            <p>Searching...</p>
           </div>
         ) : (
           <div className="space-x-2 justify-centered">
