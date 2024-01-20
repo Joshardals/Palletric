@@ -261,7 +261,7 @@ export default function SearchContainer() {
 
         {error && (
           <p className="text-xs text-red-500 mx-5">
-            Oops, can't find that place!
+            Oops, can&apos;t find that place!
           </p>
         )}
 
@@ -304,7 +304,7 @@ export default function SearchContainer() {
           </div>
         </div>
 
-        {(loadingLoc && loadingSearch) && (
+        {loadingLoc && loadingSearch && (
           <div className="absolute top-0 left-0 cursor-not-allowed bg-transparent  h-full w-full rounded-md" />
         )}
       </div>
