@@ -25,7 +25,7 @@ export interface LocationResult {
 
 export interface LocationLoadingState {
   loadingLoc: boolean;
-  updateLoading: (loading: LocationLoadingState["loadingLoc"]) => void;
+  updateLoading: (loadingLoc: LocationLoadingState["loadingLoc"]) => void;
 }
 
 export interface PaletteState {
@@ -36,6 +36,13 @@ export interface PaletteState {
 export interface SaturationState {
   saturation: number;
   updateSaturation: (saturation: SaturationState["saturation"]) => void;
+}
+
+export interface SearchLoadingState {
+  loadingSearch: boolean;
+  updateLoadingSearch: (
+    loadingSearch: SearchLoadingState["loadingSearch"]
+  ) => void;
 }
 
 export interface searchPlaceState {

@@ -15,7 +15,8 @@ import {
 import { fetchAutoCompleteFunction } from "@/lib/hooks";
 import { LocationResult } from "@/typings";
 import { Icons } from "../ui/icons";
-import CurrentLocation from "./CurrentLocation";
+import CurrentLocation from "../ui/buttons/CurrentLocation";
+import SearchPlace from "../ui/buttons/SearchPlace";
 
 export default function SearchContainer() {
   const { search, setSearch, updateSearch } = useSearchStore();
@@ -289,7 +290,10 @@ export default function SearchContainer() {
               </ul>
             </div>
           )}
-          <CurrentLocation />
+          <div className="flex justify-between items-center">
+            <CurrentLocation />
+            <SearchPlace />
+          </div>
         </div>
 
         {loadingLoc && (

@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Icons } from "../ui/icons";
+import { Icons } from "../icons";
 import {
   useLocationLoading,
   usePaletteStore,
