@@ -62,7 +62,13 @@ export default function SearchPlace() {
         )}
       </button>
 
-      {!place && <div className="absolute top-0 left-0 w-full h-full" />}
+      {!place && (
+        <div
+          className={`absolute top-0 left-0 w-full h-full rounded-md ${
+            !place && "cursor-not-allowed"
+          }`}
+        />
+      )}
     </div>
   );
 }
