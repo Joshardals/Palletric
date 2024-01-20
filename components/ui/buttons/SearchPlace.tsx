@@ -16,6 +16,7 @@ export default function SearchPlace() {
   const { updatePalette } = usePaletteStore();
 
   const handleSearch = async () => {
+    updateLoadingSearch(true);
     const res = await getLocationCoordinates(place);
     const { lat, lon }: any = res;
     const resPalette = createColorPalette(lat, lon);
@@ -29,13 +30,13 @@ export default function SearchPlace() {
       <button
         type="button"
         className={` bg-gray-800 px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full
-            transitionAll ${loadingSearch && "animate-pulse"}
+            transitionAll
         `}
         onClick={handleSearch}
       >
         {loadingSearch ? (
           <div className="space-x-2 justify-centered">
-            <Icons.spinner className=" text-[#F59E0B] animate-spin h-5 w-5" />
+            <Icons.spinner className="animate-spin h-5 w-5" />
             <p> Locating you...</p>
           </div>
         ) : (
