@@ -13,6 +13,12 @@ export interface ColorTilesProps {
   index: number;
 }
 
+// Error State for the SearchPlace component.
+export interface ErrorSearchPlaceState {
+  error: string;
+  updateError: (error: ErrorSearchPlaceState["error"]) => void;
+}
+
 export interface HueState {
   hue: number;
   updateHue: (hue: HueState["hue"]) => void;

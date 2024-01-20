@@ -1,5 +1,6 @@
 import {
   BrightnessState,
+  ErrorSearchPlaceState,
   HueState,
   LocationLoadingState,
   PaletteState,
@@ -10,6 +11,7 @@ import {
 } from "@/typings";
 import { create } from "zustand";
 
+// The state that handles toggle the SearchItem Container.
 export const useSearchStore = create<searchState>((set) => ({
   search: false,
   setSearch: () => set((state) => ({ search: !state.search })),
@@ -30,7 +32,7 @@ export const useLocationLoading = create<LocationLoadingState>((set) => ({
 
 // Loading state for the search place button
 export const useSearchLoading = create<SearchLoadingState>((set) => ({
-  loadingSearch: true,
+  loadingSearch: false,
   updateLoadingSearch: (loadingSearch) =>
     set(() => ({ loadingSearch: loadingSearch })),
 }));
@@ -55,4 +57,10 @@ export const useHue = create<HueState>((set) => ({
 export const usePaletteStore = create<PaletteState>((set) => ({
   palette: [],
   updatePalette: (palette) => set(() => ({ palette: palette })),
+}));
+
+// Error Store Here.
+export const useSearchPlaceError = create<ErrorSearchPlaceState>((set) => ({
+  error: "",
+  updateError: (error) => set(() => ({ error: error })),
 }));
