@@ -4,6 +4,7 @@ import {
   usePaletteStore,
   useSearchLoading,
   useSearchPlace,
+  useSearchPlaceError,
   useSearchStore,
 } from "@/lib/store/store";
 import { Icons } from "../icons";
@@ -16,6 +17,7 @@ export default function SearchPlace() {
   const { place } = useSearchPlace();
   const { updateSearch } = useSearchStore();
   const { updatePalette } = usePaletteStore();
+  const { error, updateError } = useSearchPlaceError();
 
   const handleSearch = async () => {
     updateLoadingSearch(true);
@@ -26,7 +28,6 @@ export default function SearchPlace() {
       const resPalette = createColorPalette(lat, lon);
       updatePalette(resPalette);
     } catch (error: any) {
-
       console.log(`Failed to find location: ${error.message}`);
     }
     updateLoadingSearch(false);
