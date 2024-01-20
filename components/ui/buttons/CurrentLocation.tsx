@@ -3,6 +3,7 @@ import { Icons } from "../icons";
 import {
   useLocationLoading,
   usePaletteStore,
+  useSearchPlace,
   useSearchStore,
 } from "@/lib/store/store";
 import { createColorPalette } from "@/lib/utils";
@@ -11,6 +12,7 @@ export default function CurrentLocation() {
   const { loadingLoc, updateLoading } = useLocationLoading();
   const { updateSearch } = useSearchStore();
   const { updatePalette } = usePaletteStore();
+  const { setPlace } = useSearchPlace();
 
   const handleCurrentLocationClick = () => {
     updateLoading(true);
@@ -30,6 +32,7 @@ export default function CurrentLocation() {
       } else {
         alert("Geolocation is not supported by your browser");
       }
+      setPlace("");
       updateLoading(false);
       updateSearch(false);
     }, 5000);

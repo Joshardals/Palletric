@@ -14,7 +14,7 @@ import { createColorPalette } from "@/lib/utils";
 
 export default function SearchPlace() {
   const { loadingSearch, updateLoadingSearch } = useSearchLoading();
-  const { place } = useSearchPlace();
+  const { place, setPlace } = useSearchPlace();
   const { updateSearch } = useSearchStore();
   const { updatePalette } = usePaletteStore();
   const { error, updateError } = useSearchPlaceError();
@@ -26,12 +26,17 @@ export default function SearchPlace() {
       const res = await getLocationCoordinates(place);
       const { lat, lon }: any = res;
       const resPalette = createColorPalette(lat, lon);
+
+      if (error) {
+        updateError(false);
+      }
       updatePalette(resPalette);
+      updateSearch(false);
+      setPlace("");
     } catch (error: any) {
-    
+      updateError(true);
     }
     updateLoadingSearch(false);
-    updateSearch(false);
   };
   return (
     <div
