@@ -1,30 +1,34 @@
-import React from "react";
+"use client";
+
+import { useSearchLoading, useSearchPlace } from "@/lib/store/store";
+import { Icons } from "../icons";
 
 export default function SearchPlace() {
+  const { loadingSearch, updateLoadingSearch } = useSearchLoading();
+  const { place } = useSearchPlace();
   const handleSearch = () => {
-    
-  }
+    alert(`Current Location is: ${place}`);
+  };
   return (
     <div
-      className="relative bg-gradient-to-r from-[#F59E0B] to-[#6BA54C]  p-[0.1rem] rounded-md cursor-pointer
-      transitionAll mx-5 w-[12.6rem]"
+      className="relative bg-gray-700  p-[0.1rem] rounded-md cursor-pointer
+      transitionAll mx-5 "
     >
       <button
         type="button"
-        className={` bg-gray-900 px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full
-            transitionAll ${loadingLoc && "animate-pulse"}
+        className={` bg-gray-800 px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full
+            transitionAll ${loadingSearch && "animate-pulse"}
         `}
         onClick={handleSearch}
       >
-        {loadingLoc ? (
+        {loadingSearch ? (
           <div className="space-x-2 justify-centered">
             <Icons.spinner className=" text-[#F59E0B] animate-spin h-5 w-5" />
             <p> Locating you...</p>
           </div>
         ) : (
           <div className="space-x-2 justify-centered">
-            <Icons.location className="h-5 w-5" />
-            <p> Current Location</p>
+            <p> Search Place</p>
           </div>
         )}
       </button>

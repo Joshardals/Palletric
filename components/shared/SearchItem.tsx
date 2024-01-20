@@ -291,8 +291,11 @@ export default function SearchContainer() {
             </div>
           )}
           <div className="flex justify-between items-center">
-            <CurrentLocation />
             <SearchPlace />
+
+            <p className="text-xs">OR USE</p>
+
+            <CurrentLocation />
           </div>
         </div>
 

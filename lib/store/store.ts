@@ -4,6 +4,7 @@ import {
   LocationLoadingState,
   PaletteState,
   SaturationState,
+  SearchLoadingState,
   searchPlaceState,
   searchState,
 } from "@/typings";
@@ -25,6 +26,13 @@ export const useSearchPlace = create<searchPlaceState>((set) => ({
 export const useLocationLoading = create<LocationLoadingState>((set) => ({
   loadingLoc: false,
   updateLoading: (loadingLoc) => set(() => ({ loadingLoc: loadingLoc })),
+}));
+
+// Loading state for the search place button
+export const useSearchLoading = create<SearchLoadingState>((set) => ({
+  loadingSearch: false,
+  updateLoadingSearch: (loadingSearch) =>
+    set(() => ({ loadingSearch: loadingSearch })),
 }));
 
 // Color Controls State Store.

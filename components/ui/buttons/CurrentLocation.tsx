@@ -40,7 +40,7 @@ export default function CurrentLocation() {
   return (
     <div
       className="relative bg-gradient-to-r from-[#F59E0B] to-[#6BA54C]  p-[0.1rem] rounded-md cursor-pointer
-      transitionAll mx-5 w-[12.6rem]"
+      transitionAll mx-5 "
     >
       <button
         type="button"
