@@ -20,24 +20,25 @@ export default function SearchPlace() {
   const { error, updateError } = useSearchPlaceError();
 
   const handleSearch = async () => {
-    updateLoadingSearch(true);
-
     try {
-      const res = await getLocationCoordinates(place);
-      const { lat, lon }: any = res;
-      const resPalette = createColorPalette(lat, lon);
+      updateLoadingSearch(true);
+      setTimeout(async () => {
+        const res = await getLocationCoordinates(place);
+        const { lat, lon }: any = res;
+        const resPalette = createColorPalette(lat, lon);
 
-      if (error) {
-        updateError(false);
-      }
+        if (error) {
+          updateError(false);
+        }
 
-      updatePalette(resPalette);
-      updateSearch(false);
-      setPlace("");
+        updateLoadingSearch(false);
+        updatePalette(resPalette);
+        updateSearch(false);
+        setPlace("");
+      }, 5000);
     } catch (error: any) {
       updateError(true);
     }
-    updateLoadingSearch(false);
   };
   return (
     <div
