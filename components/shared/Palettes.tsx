@@ -50,10 +50,9 @@ export default function Palettes() {
           {Array.from({ length: 6 }).map((_, index) => (
             <Skeleton
               key={index}
-              baseColor="#111111"
-              highlightColor="#333333"
-              height={150}
-              style={{ borderRadius: "8px" }}
+              baseColor="#1a202c"
+              highlightColor="#2d3748"
+              className=" max-sm:h-[5rem] h-[10rem] rounded-md"
             />
           ))}
         </div>
