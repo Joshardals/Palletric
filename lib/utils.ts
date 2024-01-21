@@ -1,62 +1,83 @@
 import chroma from "chroma-js";
-import SunCalc from "suncalc";
 
-interface BaseColors {
-  morning: chroma.Scale<chroma.Color>;
-  afternoon: chroma.Scale<chroma.Color>;
-  night: chroma.Scale<chroma.Color>;
+interface Location {
+  latitude: number;
+  longitude: number;
 }
 
-export function createColorPalette(
-  latitude: number,
-  longitude: number
-): string[] {
-  // Get the current date and time
-  const date = new Date();
-  const hour = date.getHours();
+export function createColorPalette(location: Location): string[] {
+  const { latitude, longitude } = location;
 
-  // Use the SunCalc library to get the solar time of the user's location
-  const solarTime = SunCalc.getTimes(date, latitude, longitude).solarNoon;
-
-  // Use the SunCalc library to get the solar angle of the user's location
-  const solarAngle = SunCalc.getPosition(
-    solarTime,
-    latitude,
-    longitude
-  ).altitude;
-
-  // Normalize latitude to the range [-90, 90]
+  // Normalize latitude and longitude
   const normalizedLatitude = Math.max(-90, Math.min(90, latitude));
+  const normalizedLongitude = Math.max(-180, Math.min(180, longitude));
 
-  // Define base colors for morning, afternoon, and night
-  const baseColors: BaseColors = {
-    morning: chroma.scale(["#FFA07A", "#FFD700"]).mode("lch"),
-    afternoon: chroma.scale(["#87CEFA", "#4682B4"]).mode("lch"),
-    night: chroma.scale(["#5C6BC0", "#3949AB"]).mode("lch"),
-  };
+  // Set the central point for color calculations
+  const centralLatitude = 0;
+  const centralLongitude = 0;
 
-  // Determine the time of day based on the hour
-  let timeOfDay: keyof BaseColors = "night";
-  if (hour >= 6 && hour < 12) {
-    timeOfDay = "morning";
-  } else if (hour >= 12 && hour < 18) {
-    timeOfDay = "afternoon";
-  }
+  // Calculate the distance from the central point
+  const distance = calculateDistance(
+    normalizedLatitude,
+    normalizedLongitude,
+    centralLatitude,
+    centralLongitude
+  );
 
-  // Get the base color for the determined time of day
-  const baseColor = baseColors[timeOfDay];
+  // Define the number of colors in the palette
+  const numColors = 6;
 
-  // Adjust the base color based on latitude and solar angle
-  const adjustedBaseColor = baseColor(normalizedLatitude / 90)
-    .saturate(solarAngle * 3)
-    .hex();
+  // Calculate the base hue based on the distance
+  const baseHue = mapToColorRange(distance, 0, 180, 0, 360);
 
-  // Generate a unique color palette by shifting the hue for each color
-  const colorPalette = Array.from({ length: 6 }, (_, index) =>
-    chroma(adjustedBaseColor)
-      .set("hsl.h", (index * 16) % 360)
-      .hex()
+  // Create a chroma color with the calculated base hue
+  const baseColor = chroma.hsl(baseHue, 70, 50);
+
+  // Generate a unique color palette with smoothly transitioning hues
+  const colorPalette = Array.from({ length: numColors }, (_, index) =>
+    baseColor.set("hsl.h", (baseHue + ((index * 40) % 360) + 360) % 360).hex()
   );
 
   return colorPalette;
+}
+
+// Helper function to calculate the distance between two points on the globe
+function calculateDistance(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+): number {
+  const R = 6371; // Earth radius in kilometers
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) *
+      Math.cos(deg2rad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  const distance = R * c;
+  return distance;
+}
+
+// Helper function to convert degrees to radians
+function deg2rad(deg: number): number {
+  return deg * (Math.PI / 180);
+}
+
+// Helper function to map a value from one range to another
+function mapToColorRange(
+  value: number,
+  inputMin: number,
+  inputMax: number,
+  outputMin: number,
+  outputMax: number
+): number {
+  const normalizedValue = (value - inputMin) / (inputMax - inputMin);
+  return Math.round(outputMin + normalizedValue * (outputMax - outputMin));
 }
