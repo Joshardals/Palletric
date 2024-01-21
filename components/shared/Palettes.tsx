@@ -57,8 +57,6 @@ export default function Palettes() {
               />
             ))}
           </div>
-
-          <ColorControls />
         </div>
       )}
     </section>
