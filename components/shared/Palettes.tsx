@@ -28,7 +28,7 @@ export default function Palettes() {
       </div>
 
       {palette.length > 0 ? (
-        <div>
+        <div className="space-y-10">
           <div className=" grid grid-cols-6 gap-8 max-md:grid-cols-2 content-center">
             {palette.map((color, index) => (
               <ColorTiles
