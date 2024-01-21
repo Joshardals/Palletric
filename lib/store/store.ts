@@ -32,7 +32,7 @@ export const useLocationLoading = create<LocationLoadingState>((set) => ({
 
 // Loading state for the search place button
 export const useSearchLoading = create<SearchLoadingState>((set) => ({
-  loadingSearch: true,
+  loadingSearch: false,
   updateLoadingSearch: (loadingSearch) =>
     set(() => ({ loadingSearch: loadingSearch })),
 }));

@@ -40,8 +40,8 @@ export default function SearchPlace() {
   };
   return (
     <div
-      className="relative bg-gray-700  p-[0.1rem] rounded-md cursor-pointer
-      transitionAll mx-5 "
+      className={`relative bg-gray-700  p-[0.1rem] rounded-md cursor-pointer
+       transition-opacity mx-5 ${!place && "opacity-50"} `}
     >
       <button
         type="button"
@@ -65,7 +65,7 @@ export default function SearchPlace() {
       {!place && (
         <div
           className={`absolute top-0 left-0 w-full h-full rounded-md ${
-            !place && "cursor-not-allowed bg-black/10"
+            !place && "cursor-not-allowed"
           }`}
         />
       )}
