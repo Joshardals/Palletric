@@ -30,6 +30,7 @@ export default function SearchPlace() {
       if (error) {
         updateError(false);
       }
+
       updatePalette(resPalette);
       updateSearch(false);
       setPlace("");

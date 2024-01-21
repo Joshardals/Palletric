@@ -27,7 +27,7 @@ export default function SearchContainer() {
   const [loading, setLoading] = useState(false);
   const { loadingLoc } = useLocationLoading();
   const { loadingSearch } = useSearchLoading();
-  const { error } = useSearchPlaceError();
+  const { error, updateError } = useSearchPlaceError();
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const suggestionListRef = useRef<HTMLUListElement>(null);
 
@@ -141,6 +141,7 @@ export default function SearchContainer() {
         const fetchedResults = await fetchAutoCompleteFunction(inputValue);
         setResults(fetchedResults);
       } catch (error: any) {
+        updateError(true);
         console.log(`Error fetching autocomplete: ${error.message}`);
       } finally {
         setLoading(false);
@@ -171,9 +172,7 @@ export default function SearchContainer() {
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-      if (e.ctrlKey && e.key === "k" && !loadingLoc) {
-        updateSearch(false);
-      } else if (e.ctrlKey && e.key === "k" && !loadingSearch) {
+      if (e.ctrlKey && e.key === "k" && !loadingLoc && !loadingSearch) {
         updateSearch(false);
       }
     };
@@ -225,7 +224,7 @@ export default function SearchContainer() {
       <div
         className={`relative bg-gray-900 rounded-2xl w-full sm:mx-auto sm:max-w-[50rem] transitionAll border border-gray-800 ${
           !(results?.length > 0) && "space-y-4"
-        } `}
+        } ${error && "space-y-2"} `}
         onClick={(e) => {
           if (search) {
             e.stopPropagation();

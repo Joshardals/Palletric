@@ -25,9 +25,7 @@ export default function Home() {
 
       // Well now, ctrl + k closes the search container as well. Check the SearchContainer component.
 
-      if (e.key === "Escape" && !loadingLoc) {
-        updateSearch(false);
-      } else if (e.key === "Escape" && !loadingSearch) {
+      if (e.key === "Escape" && !loadingLoc && !loadingSearch) {
         updateSearch(false);
       }
     };
