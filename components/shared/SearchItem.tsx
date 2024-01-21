@@ -217,7 +217,7 @@ export default function SearchContainer() {
       }
     `}
       onClick={() => {
-        if (search && !loadingLoc) {
+        if (search && !loadingLoc && !loadingSearch) {
           setSearch();
         }
       }}
