@@ -8,12 +8,11 @@ import {
 import ColorControls from "./ColorControls";
 import ColorTiles from "./ColorTiles";
 
-
 export default function Palettes() {
   const { brightness } = useBrightness();
   const { saturation } = useSaturation();
   const { hue } = useHue();
-  const { palette, updatePalette } = usePaletteStore();
+  const { palette } = usePaletteStore();
 
   return (
     <section className="w-full space-y-10">
@@ -27,21 +26,27 @@ export default function Palettes() {
         <p className="capitalize text-center">Your location, your palette</p>
       </div>
 
-      <div className=" grid grid-cols-6 gap-8 max-md:grid-cols-2 content-center">
-        {palette.map((color, index) => (
-          <ColorTiles
-            key={index}
-            id={index}
-            color={color}
-            brightness={brightness}
-            saturation={saturation}
-            hue={hue}
-            index={index}
-          />
-        ))}
-      </div>
+      {palette.length > 0 ? (
+        <div>
+          <div className=" grid grid-cols-6 gap-8 max-md:grid-cols-2 content-center">
+            {palette.map((color, index) => (
+              <ColorTiles
+                key={index}
+                id={index}
+                color={color}
+                brightness={brightness}
+                saturation={saturation}
+                hue={hue}
+                index={index}
+              />
+            ))}
+          </div>
 
-      <ColorControls />
+          <ColorControls />
+        </div>
+      ) : (
+        <div>Loading your beautiful palette</div>
+      )}
     </section>
   );
 }
