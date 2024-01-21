@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto, Open_Sans } from "next/font/google";
 import "./globals.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const roboto = Roboto({
   subsets: ["latin"],
