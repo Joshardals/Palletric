@@ -1,55 +1,62 @@
 import chroma from "chroma-js";
-import seedrandom from "seedrandom";
+import SunCalc from "suncalc";
 
-export function createColorPalette(latitude: number, longitude: number) {
-  // Normalize latitude and longitude
-  const normalizedLatitude = Math.max(-90, Math.min(90, latitude));
-  const normalizedLongitude = Math.max(-180, Math.min(180, longitude));
-
-  // Use latitude and longitude more directly for color generation
-  const baseHue = mapToColorRange(normalizedLatitude, -90, 90, 0, 360);
-  const baseSaturation = mapToColorRange(
-    normalizedLongitude,
-    -180,
-    180,
-    40,
-    100
-  );
-  const baseLightness = 50; // Adjust as needed
-
-  // Set up a random number generator with latitude and longitude for variation
-  const seed = Math.floor(
-    Math.abs(normalizedLatitude) * Math.abs(normalizedLongitude)
-  );
-  const random = seedrandom(seed.toString());
-
-  // Define the number of colors in the palette
-  const numColors = 6;
-
-  // Generate a color palette with variations
-  const colorPalette = Array.from({ length: numColors }, (_, index) => {
-    // Use baseHue and baseSaturation as starting points
-    const hue = (baseHue + random() * 60 + index * 20) % 360; // Shift hues slightly
-    const saturation = Math.max(
-      0,
-      Math.min(100, baseSaturation)
-    ); // Vary saturation around base
-    const lightness = 50; // Keep lightness consistent for better harmony
-
-    // Convert to hex using chroma
-    return chroma.hsl(hue, saturation, lightness).hex();
-  });
-
-  return colorPalette;
+interface BaseColors {
+  morning: chroma.Scale<chroma.Color>;
+  afternoon: chroma.Scale<chroma.Color>;
+  night: chroma.Scale<chroma.Color>;
 }
 
-function mapToColorRange(
-  value: number,
-  inputMin: number,
-  inputMax: number,
-  outputMin: number,
-  outputMax: number
-) {
-  const normalizedValue = (value - inputMin) / (inputMax - inputMin);
-  return Math.round(outputMin + normalizedValue * (outputMax - outputMin));
+export function createColorPalette(
+  latitude: number,
+  longitude: number
+): string[] {
+  // Get the current date and time
+  const date = new Date();
+  const hour = date.getHours();
+
+  // Use the SunCalc library to get the solar time of the user's location
+  const solarTime = SunCalc.getTimes(date, latitude, longitude).solarNoon;
+
+  // Use the SunCalc library to get the solar angle of the user's location
+  const solarAngle = SunCalc.getPosition(
+    solarTime,
+    latitude,
+    longitude
+  ).altitude;
+
+  // Normalize latitude to the range [-90, 90]
+  const normalizedLatitude = Math.max(-90, Math.min(90, latitude));
+
+  // Define base colors for morning, afternoon, and night
+  const baseColors: BaseColors = {
+    morning: chroma.scale(["#FFA07A", "#FFD700"]).mode("lch"),
+    afternoon: chroma.scale(["#87CEFA", "#4682B4"]).mode("lch"),
+    night: chroma.scale(["#5C6BC0", "#3949AB"]).mode("lch"),
+  };
+
+  // Determine the time of day based on the hour
+  let timeOfDay: keyof BaseColors = "night";
+  if (hour >= 6 && hour < 12) {
+    timeOfDay = "morning";
+  } else if (hour >= 12 && hour < 18) {
+    timeOfDay = "afternoon";
+  }
+
+  // Get the base color for the determined time of day
+  const baseColor = baseColors[timeOfDay];
+
+  // Adjust the base color based on latitude and solar angle
+  const adjustedBaseColor = baseColor(normalizedLatitude / 90)
+    .saturate(solarAngle * 3)
+    .hex();
+
+  // Generate a unique color palette by shifting the hue for each color
+  const colorPalette = Array.from({ length: 6 }, (_, index) =>
+    chroma(adjustedBaseColor)
+      .set("hsl.h", (index * 16) % 360)
+      .hex()
+  );
+
+  return colorPalette;
 }

@@ -3,7 +3,6 @@
 import {
   useBrightness,
   useHue,
-  usePaletteStore,
   useSaturation,
 } from "@/lib/store/store";
 import Slider from "./Slider";
