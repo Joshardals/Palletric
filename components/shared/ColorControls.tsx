@@ -2,6 +2,7 @@
 
 import { useBrightness, useHue, useSaturation } from "@/lib/store/store";
 import Slider from "./Slider";
+import Skeleton from "react-loading-skeleton";
 
 export default function ColorControls() {
   const { brightness, updateBrightness } = useBrightness();

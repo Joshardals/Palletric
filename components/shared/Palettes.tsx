@@ -46,15 +46,19 @@ export default function Palettes() {
           <ColorControls />
         </div>
       ) : (
-        <div className=" grid grid-cols-6 gap-8 max-md:grid-cols-2 content-center">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <Skeleton
-              key={index}
-              baseColor="#1a202c"
-              highlightColor="#2d3748"
-              className=" max-sm:h-[5rem] h-[10rem] rounded-md"
-            />
-          ))}
+        <div className="space-y-10">
+          <div className=" grid grid-cols-6 gap-8 max-md:grid-cols-2 content-center">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <Skeleton
+                key={index}
+                baseColor="#1a202c"
+                highlightColor="#2d3748"
+                className=" max-sm:h-[5rem] h-[10rem] rounded-md"
+              />
+            ))}
+          </div>
+
+          <ColorControls />
         </div>
       )}
     </section>
