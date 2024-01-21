@@ -24,13 +24,7 @@ export default function Palettes() {
           Sub-heading:
           Inspired by Nature's Colors., Local Hues, Global Inspiration, Palette Inspiration Awaits, From Location to Color Symphony
         */}
-        <p className="capitalize text-center">
-          {palette.length > 0 ? (
-            "Your location, your palette"
-          ) : (
-            <Skeleton width={200} height={20} />
-          )}
-        </p>
+        <p className="capitalize text-center">Your location, your palette</p>
       </div>
 
       {palette.length > 0 ? (
@@ -52,7 +46,17 @@ export default function Palettes() {
           <ColorControls />
         </div>
       ) : (
-        <div>Loading your beautiful palette</div>
+        <div className=" grid grid-cols-6 gap-8 max-md:grid-cols-2 content-center">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <Skeleton
+              key={index}
+              baseColor="#111111"
+              highlightColor="#333333"
+              height={150}
+              style={{ borderRadius: "8px" }}
+            />
+          ))}
+        </div>
       )}
     </section>
   );
