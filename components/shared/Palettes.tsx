@@ -8,7 +8,6 @@ import {
 import ColorControls from "./ColorControls";
 import ColorTiles from "./ColorTiles";
 import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 
 export default function Palettes() {
   const { brightness } = useBrightness();
@@ -26,7 +25,11 @@ export default function Palettes() {
           Inspired by Nature's Colors., Local Hues, Global Inspiration, Palette Inspiration Awaits, From Location to Color Symphony
         */}
         <p className="capitalize text-center">
-          {"Your location, your palette" || <Skeleton className="bg-red-500" />}
+          {palette.length > 0 ? (
+            "Your location, your palette"
+          ) : (
+            <Skeleton width={200} height={20} />
+          )}
         </p>
       </div>
 
