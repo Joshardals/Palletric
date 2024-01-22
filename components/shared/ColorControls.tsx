@@ -2,11 +2,22 @@
 
 import { useBrightness, useHue, useSaturation } from "@/lib/store/store";
 import Slider from "./Slider";
+import { MouseEvent } from "react";
 
 export default function ColorControls() {
   const { brightness, updateBrightness } = useBrightness();
   const { saturation, updateSaturation } = useSaturation();
   const { hue, updateHue } = useHue();
+
+  const resetPalette = (
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    updateBrightness(100);
+    updateSaturation(100);
+    updateHue(0);
+  };
 
   return (
     <div className="space-y-10">
@@ -32,8 +43,11 @@ export default function ColorControls() {
       </div>
 
       <div className="flex items-center justify-center">
-        <button className="bg-gray-700/50 px-4 py-2 rounded-md w-[10rem] hover:bg-gray-700/80 cursor-pointer transitionAll">
-          Reset
+        <button
+          onClick={resetPalette}
+          className="bg-gray-700/50 px-4 py-2 rounded-md w-[10rem] hover:bg-gray-700/80 cursor-pointer transitionAll"
+        >
+          Reset Palette
         </button>
       </div>
     </div>
