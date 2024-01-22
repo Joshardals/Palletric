@@ -8,7 +8,7 @@ export default function Search() {
     <div>
       <div
         className="bg-gray-700/50 py-2 px-4 flex items-center justify-between
-    cursor-pointer rounded-lg max-md:space-x-2 md:w-[14rem] hover:bg-gray-700/80 max-sm:hidden"
+    cursor-pointer rounded-lg max-md:space-x-2 md:w-[14rem] hover:bg-gray-700/80 max-sm:hidden transitionAll"
         onClick={setSearch}
       >
         <Icons.search className="h-5 w-5" />
