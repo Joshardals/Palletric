@@ -9,12 +9,12 @@ body {
 }
 
 @layer utilities {
-  .animateTiles {
+  /* .animateTiles {
     @apply overflow-hidden before:transition-all before:duration-500 before:ease-in-out 
     before:absolute before:h-full before:w-full before:bg-gradient-to-r before:from-transparent before:via-white/[30%] before:to-transparent 
     before:-translate-x-full
     hover:before:translate-x-full;
-  }
+  } */
   .h1-bold {
     @apply text-white text-[20px] max-sm:text-[18px];
   }
@@ -31,4 +31,21 @@ body {
   .wrapper {
     @apply mx-auto p-5 sm:max-w-[70rem];
   }
+}
+
+.animateTiles {
+  overflow: hidden;
+}
+
+.animateTiles::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: gainsboro;
+  transform: translateX(-100%);
+}
+
+.animateTiles::before:hover {
+  transform: translateX((100%));
 }

@@ -19,7 +19,9 @@ export default function Palettes() {
     <section className="w-full space-y-10">
       {/* Options inlcudes: Color Palettes, Inspired Palettes, Explore Hues, Location-Inspired Palettes */}
       <div className="space-y-2">
-        <h1 className="h1-bold text-center font-bold">Explore Your Palette</h1>
+        <h1 className="h1-bold text-center font-bold exploreBG">
+          Explore Your Palette
+        </h1>
         {/* I might consider tweaking this subtitle, by animating others in I guess
           Sub-heading:
           Inspired by Nature's Colors., Local Hues, Global Inspiration, Palette Inspiration Awaits, From Location to Color Symphony
