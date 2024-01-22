@@ -1,9 +1,6 @@
 import chroma from "chroma-js";
 
 export function createColorPalette(latitude: number, longitude: number) {
-  // Normalize latitude to the range [-90, 90]
-  const normalizedLatitude = Math.max(-90, Math.min(90, latitude));
-
   // Calculate a factor based on latitude for color transition
   const colorFactor = (latitude + 90) / 180;
 
@@ -34,6 +31,30 @@ export function createColorPalette(latitude: number, longitude: number) {
     "#cc9999", // Light gray
     "#999999", // Gray
     "#666666", // Dark gray
+    "#00cc99", // Teal
+    "#ffcc99", // Peach
+    "#6600cc", // Deep purple
+    "#ff99cc", // Light pink
+    "#00ccff", // Sky blue
+    "#ccff99", // Mint
+    "#996600", // Olive
+    "#ff0066", // Magenta
+    "#660066", // Dark magenta
+    "#ff6699", // Light rose
+    "#0099cc", // Steel blue
+    "#ffccff", // Pale pink
+    "#99ff99", // Light mint
+    "#ccffcc", // Lightest mint
+    "#cc66cc", // Medium purple
+    "#66cc66", // Medium green
+    "#cccc00", // Dark yellow
+    "#ff9900", // Tangerine
+    "#993333", // Dark brick
+    "#ffcc33", // Light mustard
+    "#cc3300", // Rust
+    "#ff9933", // Apricot
+    "#009966", // Dark teal
+    "#993366", // Deep rose
   ];
 
   // Calculate the number of colors in the palette
@@ -44,7 +65,7 @@ export function createColorPalette(latitude: number, longitude: number) {
 
   // Get the two adjacent base colors for interpolation
   const color1 = baseColors[baseColorIndex];
-  const color2 = baseColors[baseColorIndex + 1];
+  const color2 = baseColors[baseColorIndex + 2];
 
   // Create a chroma scale for interpolation
   const colorScale = chroma.scale([color1, color2]).mode("lch");

@@ -26,6 +26,7 @@ export default function SearchPlace() {
         const res = await getLocationCoordinates(place);
         const { lat, lon }: any = res;
         const resPalette = createColorPalette(lat, lon);
+        console.log(`Latitude: ${lat}, Longitude: ${lon}`);
 
         if (error) {
           updateError(false);
