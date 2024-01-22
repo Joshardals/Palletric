@@ -1,5 +1,10 @@
 import chroma from "chroma-js";
 
+// Function to interpolate between two colors
+function interpolateColor(color1: any, color2: any, factor: any) {
+  return chroma.mix(color1, color2, factor, "lch").hex();
+}
+
 export function createColorPalette(latitude: number, longitude: number) {
   // Normalize latitude to the range [-90, 90]
   const normalizedLatitude = Math.max(-90, Math.min(90, latitude));
@@ -7,34 +12,15 @@ export function createColorPalette(latitude: number, longitude: number) {
   // Calculate a factor based on latitude for color transition
   const colorFactor = (normalizedLatitude + 90) / 180;
 
-  // Define base colors for the gradient
-  const baseColors = [
-    "#66a3ff", // Light blue
-    "#3366ff", // Blue
-    "#ffcc66", // Light orange
-    "#ff9900", // Orange
-    "#cc6600", // Brown
-    "#ff6666", // Light red
-    "#ff3366", // Red
-    "#cc0066", // Purple
-    "#9900cc", // Dark purple
-    "#66ff66", // Light green
-    "#33cc33", // Green
-    "#99cc00", // Lime green
-    "#ffff66", // Yellow
-    "#ffcc00", // Gold
-    "#ff5050", // Salmon
-    "#ff3399", // Pink
-    "#cc99ff", // Lavender
-    "#9966cc", // Dark lavender
-    "#ff9933", // Apricot
-    "#ff6600", // Dark orange
-    "#993300", // Dark brown
-    "#669999", // Grayish blue
-    "#cc9999", // Light gray
-    "#999999", // Gray
-    "#666666", // Dark gray
-  ];
+  // Define base colors for the gradient dynamically based on latitude
+  const baseColors = chroma
+    .scale(["#66a3ff", "#ff9900", "#cc6600", "#66a3ff", "#3366ff", "#ffcc66", "#ff9900", "#cc6600",
+    "#ff6666", "#ff3366", "#cc0066", "#9900cc", "#66ff66",
+    "#33cc33", "#99cc00", "#ffff66", "#ffcc00", "#ff5050",
+    "#ff3399", "#cc99ff", "#9966cc", "#ff9933", "#ff6600",
+    "#993300", "#669999", "#cc9999", "#999999", "#666666"])
+    .mode("lch")
+    .colors(25);
 
   // Calculate the number of colors in the palette
   const numColors = 6;
@@ -42,16 +28,17 @@ export function createColorPalette(latitude: number, longitude: number) {
   // Calculate the index of the base color based on the color factor
   const baseColorIndex = Math.floor(colorFactor * (baseColors.length - 1));
 
-  // Get the two adjacent base colors for interpolation
-  const color1 = baseColors[baseColorIndex];
-  const color2 = baseColors[baseColorIndex + 10];
+  // Handle edge cases to ensure the index doesn't go out of bounds
+  const color1Index = Math.max(0, baseColorIndex);
+  const color2Index = Math.min(baseColors.length - 1, baseColorIndex + 1);
 
-  // Create a chroma scale for interpolation
-  const colorScale = chroma.scale([color1, color2]).mode("lch");
+  // Get the two adjacent base colors for interpolation
+  const color1 = baseColors[color1Index];
+  const color2 = baseColors[color2Index];
 
   // Generate the color palette by interpolating between the two base colors
   const colorPalette = Array.from({ length: numColors }, (_, index) =>
-    colorScale(index / (numColors - 1)).hex()
+    interpolateColor(color1, color2, index / (numColors - 1))
   );
 
   return colorPalette;
