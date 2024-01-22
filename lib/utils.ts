@@ -14,6 +14,26 @@ export function createColorPalette(latitude: number, longitude: number) {
     "#ffcc66", // Light orange
     "#ff9900", // Orange
     "#cc6600", // Brown
+    "#ff6666", // Light red
+    "#ff3366", // Red
+    "#cc0066", // Purple
+    "#9900cc", // Dark purple
+    "#66ff66", // Light green
+    "#33cc33", // Green
+    "#99cc00", // Lime green
+    "#ffff66", // Yellow
+    "#ffcc00", // Gold
+    "#ff5050", // Salmon
+    "#ff3399", // Pink
+    "#cc99ff", // Lavender
+    "#9966cc", // Dark lavender
+    "#ff9933", // Apricot
+    "#ff6600", // Dark orange
+    "#993300", // Dark brown
+    "#669999", // Grayish blue
+    "#cc9999", // Light gray
+    "#999999", // Gray
+    "#666666", // Dark gray
   ];
 
   // Calculate the number of colors in the palette
