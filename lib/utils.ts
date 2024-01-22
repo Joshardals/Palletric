@@ -1,83 +1,38 @@
 import chroma from "chroma-js";
 
-interface Location {
-  latitude: number;
-  longitude: number;
-}
-
-export function createColorPalette(location: Location): string[] {
-  const { latitude, longitude } = location;
-
-  // Normalize latitude and longitude
+export function createColorPalette(latitude: number, longitude: number) {
+  // Normalize latitude to the range [-90, 90]
   const normalizedLatitude = Math.max(-90, Math.min(90, latitude));
-  const normalizedLongitude = Math.max(-180, Math.min(180, longitude));
 
-  // Set the central point for color calculations
-  const centralLatitude = 0;
-  const centralLongitude = 0;
+  // Calculate a factor based on latitude for color transition
+  const colorFactor = (normalizedLatitude + 90) / 180;
 
-  // Calculate the distance from the central point
-  const distance = calculateDistance(
-    normalizedLatitude,
-    normalizedLongitude,
-    centralLatitude,
-    centralLongitude
-  );
+  // Define base colors for the gradient
+  const baseColors = [
+    "#66a3ff", // Light blue
+    "#3366ff", // Blue
+    "#ffcc66", // Light orange
+    "#ff9900", // Orange
+    "#cc6600", // Brown
+  ];
 
-  // Define the number of colors in the palette
+  // Calculate the number of colors in the palette
   const numColors = 6;
 
-  // Calculate the base hue based on the distance
-  const baseHue = mapToColorRange(distance, 0, 180, 0, 360);
+  // Calculate the index of the base color based on the color factor
+  const baseColorIndex = Math.floor(colorFactor * (baseColors.length - 1));
 
-  // Create a chroma color with the calculated base hue
-  const baseColor = chroma.hsl(baseHue, 70, 50);
+  // Get the two adjacent base colors for interpolation
+  const color1 = baseColors[baseColorIndex];
+  const color2 = baseColors[baseColorIndex + 1];
 
-  // Generate a unique color palette with smoothly transitioning hues
+  // Create a chroma scale for interpolation
+  const colorScale = chroma.scale([color1, color2]).mode("lch");
+
+  // Generate the color palette by interpolating between the two base colors
   const colorPalette = Array.from({ length: numColors }, (_, index) =>
-    baseColor.set("hsl.h", (baseHue + ((index * 40) % 360) + 360) % 360).hex()
+    colorScale(index / (numColors - 1)).hex()
   );
 
   return colorPalette;
-}
-
-// Helper function to calculate the distance between two points on the globe
-function calculateDistance(
-  lat1: number,
-  lon1: number,
-  lat2: number,
-  lon2: number
-): number {
-  const R = 6371; // Earth radius in kilometers
-  const dLat = deg2rad(lat2 - lat1);
-  const dLon = deg2rad(lon2 - lon1);
-
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(deg2rad(lat1)) *
-      Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-  const distance = R * c;
-  return distance;
-}
-
-// Helper function to convert degrees to radians
-function deg2rad(deg: number): number {
-  return deg * (Math.PI / 180);
-}
-
-// Helper function to map a value from one range to another
-function mapToColorRange(
-  value: number,
-  inputMin: number,
-  inputMax: number,
-  outputMin: number,
-  outputMax: number
-): number {
-  const normalizedValue = (value - inputMin) / (inputMax - inputMin);
-  return Math.round(outputMin + normalizedValue * (outputMax - outputMin));
 }
