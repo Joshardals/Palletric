@@ -5,7 +5,7 @@ export function createColorPalette(latitude: number, longitude: number) {
   const normalizedLatitude = Math.max(-90, Math.min(90, latitude));
 
   // Calculate a factor based on latitude for color transition
-  const colorFactor = (normalizedLatitude + 90) / 180;
+  const colorFactor = (latitude + 90) / 180;
 
   // Define base colors for the gradient
   const baseColors = [
@@ -44,7 +44,7 @@ export function createColorPalette(latitude: number, longitude: number) {
 
   // Get the two adjacent base colors for interpolation
   const color1 = baseColors[baseColorIndex];
-  const color2 = baseColors[baseColorIndex + 1];
+  const color2 = baseColors[baseColorIndex + 5];
 
   // Create a chroma scale for interpolation
   const colorScale = chroma.scale([color1, color2]).mode("lch");

@@ -48,7 +48,7 @@ export default function ColorTiles({
   const { r, g, b } = setRgbColor();
   return (
     <div
-      className="rounded-md max-sm:h-[5rem] h-[10rem] relative"
+      className="rounded-md max-sm:h-[5rem] h-[10rem] relative select-text"
       onMouseEnter={() => setColorInfo(true)}
       onMouseLeave={() => setColorInfo(false)}
     >
