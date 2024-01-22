@@ -44,7 +44,7 @@ export function createColorPalette(latitude: number, longitude: number) {
 
   // Get the two adjacent base colors for interpolation
   const color1 = baseColors[baseColorIndex];
-  const color2 = baseColors[baseColorIndex + 1];
+  const color2 = baseColors[baseColorIndex + 10];
 
   // Create a chroma scale for interpolation
   const colorScale = chroma.scale([color1, color2]).mode("lch");
