@@ -7,7 +7,7 @@ export default function Footer() {
       >
         Footer - Light/Dark Mode, Sharing Buttons, Messaging Apps. Saving
         Options, maybe Inspiration Gallery ( on subsequent updates)
-      </div> j
+      </div>
     </section>
   );
 }
