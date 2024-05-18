@@ -3,7 +3,7 @@ import Link from "next/link";
 import Search from "./Search";
 
 export default function Header() {
-  return (
+  return (jj
     <div className="fixed top-0 left-0 right-0 backdrop-blur-[100px] select-none hfPadding z-10 bg-gray-950/70">
       <div
         className="flex items-center justify-between bg-gray-900
